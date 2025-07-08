@@ -41,19 +41,17 @@ RUN cd /root && git clone https://github.com/comfyanonymous/ComfyUI && \
 
 WORKDIR /root/ComfyUI
 
-# Create model directories
-RUN mkdir -p models/diffusion_models models/text_encoders models/vae
 
 # Download HunyuanVideo main model (720p version)
-RUN cd models/diffusion_models/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/TencentARC/HunyuanVideo/resolve/main/hunyuan_video_t2v_720p_bf16.safetensors -o hunyuan_video_t2v_720p_bf16.safetensors
+RUN cd models/diffusion_models/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/diffusion_models/hunyuan_video_t2v_720p_bf16.safetensors -o hunyuan_video_t2v_720p_bf16.safetensors
 
 # Download HunyuanVideo text encoders
 RUN cd models/text_encoders/ && \
-    aria2c -k 1M -s 10 -x 10 https://huggingface.co/TencentARC/HunyuanVideo/resolve/main/clip_l.safetensors -o clip_l.safetensors && \
-    aria2c -k 1M -s 10 -x 10 https://huggingface.co/TencentARC/HunyuanVideo/resolve/main/llava_llama3_fp8_scaled.safetensors -o llava_llama3_fp8_scaled.safetensors
+    aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/text_encoders/clip_l.safetensors -o clip_l.safetensors && \
+    aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/text_encoders/llava_llama3_fp8_scaled.safetensors -o llava_llama3_fp8_scaled.safetensors
 
 # Download HunyuanVideo VAE
-RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/TencentARC/HunyuanVideo/resolve/main/hunyuan_video_vae_bf16.safetensors -o hunyuan_video_vae_bf16.safetensors
+RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/vae/hunyuan_video_vae_bf16.safetensors -o hunyuan_video_vae_bf16.safetensors
 
 # Copy HunyuanVideo supervisor configuration
 COPY hunyuanvideo/hunyuanvideo.sh         /opt/supervisor/hunyuanvideo.sh
