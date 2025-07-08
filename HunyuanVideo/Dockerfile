@@ -57,6 +57,9 @@ RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/
 COPY hunyuanvideo/hunyuanvideo.sh         /opt/supervisor/hunyuanvideo.sh
 COPY hunyuanvideo/hunyuanvideo.conf       /etc/supervisor/conf.d/hunyuanvideo.conf
 
+#Copy hunyuanvideo default workflow
+COPY hunyuanvideo/hunyuanvideo.json /root/ComfyUI/user/default/workflows/hunyuanvideo.json
+
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 # override defaultGraph.ts is useless, need to modify index-CaD4RONs.js 
 # COPY defaultGraph.ts /root/ComfyUI/web/scripts/defaultGraph.js
