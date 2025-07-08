@@ -1,0 +1,63 @@
+{
+  "last_node_id": 8,
+  "last_link_id": 7,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "HunyuanVideoLoader",
+      "pos": [100, 100],
+      "size": {"0": 210, "1": 46},
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "title": "HunyuanVideo Loader",
+      "properties": {},
+      "widgets_values": ["hunyuan_video_t2v_720p_bf16.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "HunyuanVideoTextEncode",
+      "pos": [400, 100],
+      "size": {"0": 210, "1": 46},
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "title": "HunyuanVideo Text Encode",
+      "properties": {},
+      "widgets_values": ["A beautiful video of a cat playing in the garden"]
+    },
+    {
+      "id": 3,
+      "type": "HunyuanVideoSampler",
+      "pos": [700, 100],
+      "size": {"0": 210, "1": 46},
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "title": "HunyuanVideo Sampler",
+      "properties": {},
+      "widgets_values": [16, 1.0, 1, "euler", "normal", 1]
+    },
+    {
+      "id": 4,
+      "type": "HunyuanVideoSave",
+      "pos": [1000, 100],
+      "size": {"0": 210, "1": 46},
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "title": "HunyuanVideo Save",
+      "properties": {},
+      "widgets_values": ["hunyuanvideo_output", "mp4"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0],
+    [2, 2, 0, 3, 0],
+    [3, 3, 0, 4, 0]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+} 
