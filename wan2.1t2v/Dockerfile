@@ -48,8 +48,8 @@ RUN cd models/text_encoders/ && \
 RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors -o wan_2.1_vae.safetensors
 
 # Copy wan2.1t2v supervisor configuration
-COPY wan2.1/wan2.1.sh         /opt/supervisor/wan2.1.sh
-COPY wan2.1/wan2.1.conf       /etc/supervisor/conf.d/wan2.1.conf
+COPY wan2.1t2v/wan2.1t2v.sh         /opt/supervisor/wan2.1t2v.sh
+COPY wan2.1t2v/wan2.1t2v.conf       /etc/supervisor/conf.d/wan2.1t2v.conf
 
 
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
