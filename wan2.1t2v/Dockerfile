@@ -51,6 +51,8 @@ RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/
 COPY wan2.1t2v/wan2.1t2v.sh         /opt/supervisor/wan2.1t2v.sh
 COPY wan2.1t2v/wan2.1t2v.conf       /etc/supervisor/conf.d/wan2.1t2v.conf
 
+#Copy wan2.1t2v default workflow
+COPY wan2.1t2v/wan2.1t2v.json /root/ComfyUI/user/default/workflows/wan2.1t2v.json
 
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 # override defaultGraph.ts is useless, need to modify index-CaD4RONs.js 

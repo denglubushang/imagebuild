@@ -41,7 +41,6 @@ RUN cd /root && git clone https://github.com/comfyanonymous/ComfyUI && \
 
 WORKDIR /root/ComfyUI
 
-
 # Download HunyuanVideo main model (720p version)
 RUN cd models/diffusion_models/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/diffusion_models/hunyuan_video_t2v_720p_bf16.safetensors -o hunyuan_video_t2v_720p_bf16.safetensors
 
@@ -59,6 +58,9 @@ COPY hunyuanvideo/hunyuanvideo.conf       /etc/supervisor/conf.d/hunyuanvideo.co
 
 #Copy hunyuanvideo default workflow
 COPY hunyuanvideo/hunyuanvideo.json /root/ComfyUI/user/default/workflows/hunyuanvideo.json
+
+#Download comfyui-manager
+RUN cd /root/ComfyUI/custom_nodes && git clone https://github.com/ltdrdata/ComfyUI-Manager comfyui-manager
 
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 # override defaultGraph.ts is useless, need to modify index-CaD4RONs.js 
