@@ -47,12 +47,12 @@ RUN cd models/text_encoders/ && \
 # Download wan2.1t2v VAE
 RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors -o wan_2.1_vae.safetensors
 
-# Copy wan2.1t2v supervisor configuration
-COPY wan2.1t2v/wan2.1t2v.sh         /opt/supervisor/wan2.1t2v.sh
-COPY wan2.1t2v/wan2.1t2v.conf       /etc/supervisor/conf.d/wan2.1t2v.conf
+# Copy comfyui supervisor configuration
+COPY comfyui/comfyui.sh         /opt/supervisor/comfyui.sh
+COPY comfyui/comfyui.conf       /etc/supervisor/conf.d/comfyui.conf
 
 #Copy wan2.1t2v default workflow
-COPY wan2.1t2v/wan2.1t2v.json /root/ComfyUI/user/default/workflows/wan2.1t2v.json
+COPY comfyui/wan2.1t2v.json /root/ComfyUI/user/default/workflows/wan2.1t2v.json
 
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 # override defaultGraph.ts is useless, need to modify index-CaD4RONs.js 
