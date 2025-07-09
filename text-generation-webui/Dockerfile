@@ -20,10 +20,9 @@ RUN git clone https://github.com/oobabooga/text-generation-webui.git
 
 WORKDIR /home/app/text-generation-webui
 
+RUN rm -rf installer_files/conda installer_files/env installer_files/miniforge_installer.sh
+
 RUN GPU_CHOICE=A LAUNCH_AFTER_INSTALL=FALSE INSTALL_EXTENSIONS=TRUE ./start_linux.sh --verbose
-
-COPY /user_data/CMD_FLAGS.txt /home/app/text-generation-webui/user_data
-
 
 WORKDIR /home/app/text-generation-webui
 # set umask to ensure group read / write at runtime
