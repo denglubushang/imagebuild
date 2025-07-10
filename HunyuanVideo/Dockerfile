@@ -52,12 +52,12 @@ RUN cd models/text_encoders/ && \
 # Download HunyuanVideo VAE
 RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/vae/hunyuan_video_vae_bf16.safetensors -o hunyuan_video_vae_bf16.safetensors
 
-# Copy HunyuanVideo supervisor configuration
-COPY hunyuanvideo/hunyuanvideo.sh         /opt/supervisor/hunyuanvideo.sh
-COPY hunyuanvideo/hunyuanvideo.conf       /etc/supervisor/conf.d/hunyuanvideo.conf
+# Copy comfyui supervisor configuration
+COPY comfyui/comfyui.sh         /opt/supervisor/comfyui.sh
+COPY comfyui/comfyui.conf       /etc/supervisor/conf.d/comfyui.conf
 
 #Copy hunyuanvideo default workflow
-COPY hunyuanvideo/hunyuanvideo.json /root/ComfyUI/user/default/workflows/hunyuanvideo.json
+COPY comfyui/hunyuanvideo.json /root/ComfyUI/user/default/workflows/hunyuanvideo.json
 
 #Download comfyui-manager
 RUN cd /root/ComfyUI/custom_nodes && git clone https://github.com/ltdrdata/ComfyUI-Manager comfyui-manager
