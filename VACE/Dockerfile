@@ -46,6 +46,8 @@ RUN cd models/text_encoders/ && \
 # Download wan2.1t2v VAE
 RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors -o wan_2.1_vae.safetensors
 
+RUN cd models/loras/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors -o Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors
+
 # Copy comfyui supervisor configuration
 COPY comfyui/comfyui.sh         /opt/supervisor/comfyui.sh
 COPY comfyui/comfyui.conf       /etc/supervisor/conf.d/comfyui.conf
