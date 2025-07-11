@@ -401,29 +401,6 @@
       ]
     },
     {
-      "id": 77,
-      "type": "MarkdownNote",
-      "pos": [
-        -1170,
-        0
-      ],
-      "size": [
-        470,
-        800
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "properties": {},
-      "widgets_values": [
-        "[Tutorial](https://docs.comfy.org/tutorials/video/wan/vace) | [教程](https://docs.comfy.org/zh-CN/tutorials/video/wan/vace)\n\n[Causvid Lora extracted  by Kijai](https://www.reddit.com/r/StableDiffusion/comments/1knuafk/causvid_lora_massive_speedup_for_wan21_made_by/) Thanks to CausVid MIT\n\n##  14B Support 480P 720P\n\n**Diffusion Model**\n- [wan2.1_vace_14B_fp16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_vace_14B_fp16.safetensors)\n\n**LoRA**\n- [Wan21_CausVid_14B_T2V_lora_rank32.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_CausVid_14B_T2V_lora_rank32.safetensors)\n\nIt takes about 40 minutes to complete at 81 frames 720P resolution with the RTX 4090 .  \nAfter using Wan21_CausVid_14B_T2V_lora_rank32.safetensors, it only takes about 4 minutes.\n\n## 1.3B Support 480P only\n\n**Diffusion Model**\n- [wan2.1_vace_1.3B_fp16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_vace_14B_fp16.safetensors)\n\n**LoRA**\n- [Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors)\n \n\n## Other Models\n\n* You may already have these models if you use Wan workflow before.\n\n**VAE**\n- [wan_2.1_vae.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors?download=true)\n\n**Text encoders**   Chose one of following model\n- [umt5_xxl_fp16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp16.safetensors?download=true)\n- [umt5_xxl_fp8_e4m3fn_scaled.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors?download=true)\n\n> You can choose between fp16 of fp8; I used fp16 to match what kijai's wrapper is compatible with.\n\nFile save location\n\n```\nComfyUI/\n├── models/\n│   ├── diffusion_models/\n│   │   ├-── wan2.1_vace_14B_fp16.safetensors\n│   │   └─── wan2.1_vace_1.3B_fp16.safetensors \n│   ├── text_encoders/\n│   │   └─── umt5_xxl_fp8_e4m3fn_scaled.safetensors # or fp16\n│   ├── loras/\n│   │   ├── Wan21_CausVid_14B_T2V_lora_rank32.safetensors\n│   │   └── Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors\n│   └── vae/\n│       └──  wan_2.1_vae.safetensors\n```\n"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
       "id": 112,
       "type": "MarkdownNote",
       "pos": [
@@ -435,7 +412,7 @@
         170
       ],
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -492,7 +469,7 @@
         106
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -537,7 +514,7 @@
         58
       ],
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -581,7 +558,7 @@
         82
       ],
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -711,7 +688,7 @@
         140
       ],
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -735,7 +712,7 @@
         220
       ],
       "flags": {},
-      "order": 7,
+      "order": 6,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -809,6 +786,29 @@
       ],
       "color": "#322",
       "bgcolor": "#533"
+    },
+    {
+      "id": 77,
+      "type": "MarkdownNote",
+      "pos": [
+        -1170,
+        0
+      ],
+      "size": [
+        470,
+        800
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "[Tutorial](https://docs.comfy.org/tutorials/video/wan/vace)\n\n[Causvid Lora extracted  by Kijai](https://www.reddit.com/r/StableDiffusion/comments/1knuafk/causvid_lora_massive_speedup_for_wan21_made_by/) Thanks to CausVid MIT\n\n##  14B Support 480P 720P\n\n**Diffusion Model**\n- [wan2.1_vace_14B_fp16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_vace_14B_fp16.safetensors)\n\n**LoRA**\n- [Wan21_CausVid_14B_T2V_lora_rank32.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_CausVid_14B_T2V_lora_rank32.safetensors)\n\nIt takes about 40 minutes to complete at 81 frames 720P resolution with the RTX 4090 .  \nAfter using Wan21_CausVid_14B_T2V_lora_rank32.safetensors, it only takes about 4 minutes.\n\n## 1.3B Support 480P only\n\n**Diffusion Model**\n- [wan2.1_vace_1.3B_fp16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_vace_14B_fp16.safetensors)\n\n**LoRA**\n- [Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors)\n \n\n## Other Models\n\n* You may already have these models if you use Wan workflow before.\n\n**VAE**\n- [wan_2.1_vae.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors?download=true)\n\n**Text encoders**   Chose one of following model\n- [umt5_xxl_fp16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp16.safetensors?download=true)\n- [umt5_xxl_fp8_e4m3fn_scaled.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors?download=true)\n\n> You can choose between fp16 of fp8; I used fp16 to match what kijai's wrapper is compatible with.\n\nFile save location\n\n```\nComfyUI/\n├── models/\n│   ├── diffusion_models/\n│   │   ├-── wan2.1_vace_14B_fp16.safetensors\n│   │   └─── wan2.1_vace_1.3B_fp16.safetensors \n│   ├── text_encoders/\n│   │   └─── umt5_xxl_fp8_e4m3fn_scaled.safetensors # or fp16\n│   ├── loras/\n│   │   ├── Wan21_CausVid_14B_T2V_lora_rank32.safetensors\n│   │   └── Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors\n│   └── vae/\n│       └──  wan_2.1_vae.safetensors\n```\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
     }
   ],
   "links": [
@@ -1048,10 +1048,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6727499949325614,
+      "scale": 1.08347059433884,
       "offset": [
-        940.8684820160428,
-        -921.3816063819099
+        1561.4140265956607,
+        9.774001598058403
       ]
     },
     "frontendVersion": "1.23.4",
