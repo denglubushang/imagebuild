@@ -23,7 +23,17 @@ RUN chown -R user:user /content
 WORKDIR /content
 USER user
 
-COPY --chown=user:user . /content/app
-RUN mv /content/app/models /content/app/models.org
+# 安装git（如果还没有安装）
+RUN apt-get update -y && apt-get install -y git
+
+# 克隆Fooocus仓库到临时目录
+RUN git clone --depth=1 https://github.com/lllyasviel/Fooocus.git /tmp/fooocus
+
+# 复制应用代码到目标目录
+RUN cp -r /tmp/fooocus/* /content/app/ && \
+    mv /content/app/models /content/app/models.org
+
+# 清理临时文件
+RUN rm -rf /tmp/fooocus
 
 CMD [ "sh", "-c", "/content/entrypoint.sh ${CMDARGS}" ]
