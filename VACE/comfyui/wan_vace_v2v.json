@@ -18,7 +18,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 26,
+      "order": 23,
       "mode": 0,
       "inputs": [
         {
@@ -63,7 +63,7 @@
         262
       ],
       "flags": {},
-      "order": 22,
+      "order": 19,
       "mode": 0,
       "inputs": [
         {
@@ -103,7 +103,7 @@
         "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        517347655391183,
+        643320979512416,
         "randomize",
         4,
         1,
@@ -126,7 +126,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 16,
+      "order": 13,
       "mode": 0,
       "inputs": [
         {
@@ -236,7 +236,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 23,
+      "order": 20,
       "mode": 0,
       "inputs": [
         {
@@ -285,7 +285,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 24,
+      "order": 21,
       "mode": 0,
       "inputs": [
         {
@@ -329,7 +329,7 @@
         800
       ],
       "flags": {},
-      "order": 25,
+      "order": 22,
       "mode": 4,
       "inputs": [
         {
@@ -353,151 +353,6 @@
       ]
     },
     {
-      "id": 108,
-      "type": "UNETLoader",
-      "pos": [
-        -670,
-        40
-      ],
-      "size": [
-        350,
-        82
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 4,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "MODEL",
-          "type": "MODEL",
-          "slot_index": 0,
-          "links": [
-            178
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.3.34",
-        "Node name for S&R": "UNETLoader",
-        "models": [
-          {
-            "name": "wan2.1_vace_1.3B_fp16.safetensors",
-            "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_vace_1.3B_fp16.safetensors",
-            "directory": "diffusion_models"
-          }
-        ]
-      },
-      "widgets_values": [
-        "wan2.1_vace_1.3B_fp16.safetensors",
-        "default"
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 109,
-      "type": "LoraLoader",
-      "pos": [
-        -670,
-        160
-      ],
-      "size": [
-        350,
-        126
-      ],
-      "flags": {},
-      "order": 13,
-      "mode": 4,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "MODEL",
-          "link": 178
-        },
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 179
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MODEL",
-          "type": "MODEL",
-          "links": []
-        },
-        {
-          "name": "CLIP",
-          "type": "CLIP",
-          "links": []
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.3.38",
-        "Node name for S&R": "LoraLoader",
-        "models": [
-          {
-            "name": "Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors",
-            "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors",
-            "directory": "loras"
-          }
-        ]
-      },
-      "widgets_values": [
-        "Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors",
-        0.7000000000000002,
-        1
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 111,
-      "type": "CLIPLoader",
-      "pos": [
-        -680,
-        350
-      ],
-      "size": [
-        370,
-        106
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 4,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "CLIP",
-          "type": "CLIP",
-          "slot_index": 0,
-          "links": []
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.3.34",
-        "Node name for S&R": "CLIPLoader",
-        "models": [
-          {
-            "name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
-            "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors?download=true",
-            "directory": "text_encoders"
-          }
-        ]
-      },
-      "widgets_values": [
-        "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
-        "wan",
-        "default"
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
       "id": 49,
       "type": "WanVaceToVideo",
       "pos": [
@@ -509,7 +364,7 @@
         254
       ],
       "flags": {},
-      "order": 21,
+      "order": 18,
       "mode": 0,
       "inputs": [
         {
@@ -601,7 +456,7 @@
         928
       ],
       "flags": {},
-      "order": 27,
+      "order": 24,
       "mode": 0,
       "inputs": [
         {
@@ -634,7 +489,7 @@
         246
       ],
       "flags": {},
-      "order": 20,
+      "order": 17,
       "mode": 4,
       "inputs": [
         {
@@ -663,7 +518,7 @@
         186.98114013671875
       ],
       "flags": {},
-      "order": 4,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -686,7 +541,7 @@
         66
       ],
       "flags": {},
-      "order": 15,
+      "order": 12,
       "mode": 0,
       "inputs": [
         {
@@ -733,7 +588,7 @@
         82
       ],
       "flags": {},
-      "order": 19,
+      "order": 16,
       "mode": 4,
       "inputs": [
         {
@@ -774,7 +629,7 @@
         800
       ],
       "flags": {},
-      "order": 5,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -797,7 +652,7 @@
         170
       ],
       "flags": {},
-      "order": 6,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -808,69 +663,6 @@
       ],
       "color": "#432",
       "bgcolor": "#653"
-    },
-    {
-      "id": 107,
-      "type": "LoraLoader",
-      "pos": [
-        -260,
-        210
-      ],
-      "size": [
-        350,
-        126
-      ],
-      "flags": {},
-      "order": 14,
-      "mode": 4,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "MODEL",
-          "link": 188
-        },
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 189
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MODEL",
-          "type": "MODEL",
-          "links": [
-            192
-          ]
-        },
-        {
-          "name": "CLIP",
-          "type": "CLIP",
-          "links": [
-            190,
-            191
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.3.38",
-        "Node name for S&R": "LoraLoader",
-        "models": [
-          {
-            "name": "Wan21_CausVid_14B_T2V_lora_rank32.safetensors",
-            "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan21_CausVid_14B_T2V_lora_rank32.safetensors",
-            "directory": "loras"
-          }
-        ]
-      },
-      "widgets_values": [
-        "Wan21_CausVid_14B_T2V_lora_rank32.safetensors",
-        0.30000000000000004,
-        1
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
     },
     {
       "id": 6,
@@ -884,7 +676,7 @@
         290
       ],
       "flags": {},
-      "order": 17,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
@@ -927,7 +719,7 @@
         82
       ],
       "flags": {},
-      "order": 7,
+      "order": 5,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -971,7 +763,7 @@
         106
       ],
       "flags": {},
-      "order": 8,
+      "order": 6,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -980,7 +772,6 @@
           "type": "CLIP",
           "slot_index": 0,
           "links": [
-            179,
             189
           ]
         }
@@ -1001,6 +792,160 @@
         "umt5_xxl_fp16.safetensors",
         "wan",
         "default"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        150,
+        390
+      ],
+      "size": [
+        425.27801513671875,
+        180.6060791015625
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 191
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            97
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode (Negative Prompt)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.34",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 113,
+      "type": "MarkdownNote",
+      "pos": [
+        -680,
+        500
+      ],
+      "size": [
+        370,
+        220
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Note",
+      "properties": {},
+      "widgets_values": [
+        "The generation quality of the 14B model is better, but it takes longer to generate. If you have already downloaded the model, you can choose to directly use the nodes above, or just modify the model loaded by the loader node.\n\nThe corresponding LoRA should match the Diffusion Model. For example, the LoRA corresponding to the 14B diffusion model is the 14B LoRA. \n\n---\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 149,
+      "type": "MarkdownNote",
+      "pos": [
+        -290,
+        -190
+      ],
+      "size": [
+        410,
+        140
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "About CausVid LoRA",
+      "properties": {},
+      "widgets_values": [
+        "We have added CausVid LoRA by default to achieve acceleration. However, in some cases, the video may shake and become blurry. You might need to test different LoRA intensities to get the best results, which should be between 0.3 and 0.7. If you don't need it, you can use the bypass mode to disable it, and then restore the settings of `KSampler` to the default ones.\n\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 107,
+      "type": "LoraLoader",
+      "pos": [
+        -260,
+        210
+      ],
+      "size": [
+        350,
+        126
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 188
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 189
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            192
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            190,
+            191
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.38",
+        "Node name for S&R": "LoraLoader",
+        "models": [
+          {
+            "name": "Wan21_CausVid_14B_T2V_lora_rank32.safetensors",
+            "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan21_CausVid_14B_T2V_lora_rank32.safetensors",
+            "directory": "loras"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors",
+        0.30000000000000004,
+        1
       ],
       "color": "#322",
       "bgcolor": "#533"
@@ -1081,97 +1026,6 @@
       ],
       "color": "#322",
       "bgcolor": "#533"
-    },
-    {
-      "id": 7,
-      "type": "CLIPTextEncode",
-      "pos": [
-        150,
-        390
-      ],
-      "size": [
-        425.27801513671875,
-        180.6060791015625
-      ],
-      "flags": {},
-      "order": 18,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 191
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "slot_index": 0,
-          "links": [
-            97
-          ]
-        }
-      ],
-      "title": "CLIP Text Encode (Negative Prompt)",
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.3.34",
-        "Node name for S&R": "CLIPTextEncode"
-      },
-      "widgets_values": [
-        ""
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 113,
-      "type": "MarkdownNote",
-      "pos": [
-        -680,
-        500
-      ],
-      "size": [
-        370,
-        220
-      ],
-      "flags": {},
-      "order": 11,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "Note",
-      "properties": {},
-      "widgets_values": [
-        "The generation quality of the 14B model is better, but it takes longer to generate. If you have already downloaded the model, you can choose to directly use the nodes above, or just modify the model loaded by the loader node.\n\nThe corresponding LoRA should match the Diffusion Model. For example, the LoRA corresponding to the 14B diffusion model is the 14B LoRA. \n\n---\n"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
-      "id": 149,
-      "type": "MarkdownNote",
-      "pos": [
-        -290,
-        -190
-      ],
-      "size": [
-        410,
-        140
-      ],
-      "flags": {},
-      "order": 12,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "About CausVid LoRA",
-      "properties": {},
-      "widgets_values": [
-        "We have added CausVid LoRA by default to achieve acceleration. However, in some cases, the video may shake and become blurry. You might need to test different LoRA intensities to get the best results, which should be between 0.3 and 0.7. If you don't need it, you can use the bypass mode to disable it, and then restore the settings of `KSampler` to the default ones.\n\n"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
     }
   ],
   "links": [
@@ -1262,22 +1116,6 @@
       3,
       3,
       "LATENT"
-    ],
-    [
-      178,
-      108,
-      0,
-      109,
-      0,
-      "MODEL"
-    ],
-    [
-      179,
-      110,
-      0,
-      109,
-      1,
-      "CLIP"
     ],
     [
       183,
@@ -1452,25 +1290,12 @@
     },
     {
       "id": 10,
-      "title": "14B",
+      "title": "1.3B",
       "bounding": [
         -270,
         10,
         370,
         340
-      ],
-      "color": "#3f789e",
-      "font_size": 24,
-      "flags": {}
-    },
-    {
-      "id": 11,
-      "title": "1.3B",
-      "bounding": [
-        -680,
-        -30,
-        370,
-        330
       ],
       "color": "#3f789e",
       "font_size": 24,
@@ -1521,8 +1346,8 @@
     "ds": {
       "scale": 0.7400249944258235,
       "offset": [
-        874.6426771785026,
-        214.84283396204177
+        1246.522076424372,
+        -53.256323923511225
       ]
     },
     "frontendVersion": "1.23.4",

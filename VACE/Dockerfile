@@ -39,13 +39,14 @@ RUN cd /root/ComfyUI/custom_nodes && git clone https://github.com/ltdrdata/Comfy
 # Download Wan2.1vace main model (720p version)
 RUN cd models/diffusion_models/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_vace_1.3B_fp16.safetensors -o wan2.1_vace_1.3B_fp16.safetensors
 
-# Download wan2.1t2v text encoders
+# Download wan2.1 text encoders
 RUN cd models/text_encoders/ && \
     aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp16.safetensors -o umt5_xxl_fp16.safetensors 
 
-# Download wan2.1t2v VAE
+# Download wan2.1 VAE
 RUN cd models/vae/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors -o wan_2.1_vae.safetensors
 
+#Download wan21lora model
 RUN cd models/loras/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors -o Wan21_CausVid_bidirect2_T2V_1_3B_lora_rank32.safetensors
 
 # Copy comfyui supervisor configuration
