@@ -23,8 +23,6 @@ RUN chown -R user:user /content
 WORKDIR /content
 USER user
 
-# 安装git（如果还没有安装）
-RUN apt-get update -y && apt-get install -y git
 
 # 克隆Fooocus仓库到临时目录
 RUN git clone --depth=1 https://github.com/lllyasviel/Fooocus.git /tmp/fooocus
