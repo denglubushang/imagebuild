@@ -1,5 +1,8 @@
 FROM ghcr.io/lllyasviel/fooocus:edge
 
+# 确保以root权限执行apt命令
+USER root
+
 RUN apt update -y && apt install -y aria2 && apt clean
 
 RUN cd /content/app/models/vae_approx/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/lllyasviel/misc/resolve/main/xlvaeapp.pth -o xlvaeapp.pth
@@ -13,4 +16,7 @@ RUN cd /content/app/models/prompt_expansion/fooocus_expansion/ && aria2c -k 1M -
 RUN cd /content/data/models/checkpoints/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/juggernautXL_v8Rundiffusion.safetensors -o juggernautXL_v8Rundiffusion.safetensors
 
 RUN cd /content/data/models/loras/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_offset_example-lora_1.0.safetensors -o sd_xl_offset_example-lora_1.0.safetensors
+
+# 切换回非root用户（如果需要的话）
+USER user
 
