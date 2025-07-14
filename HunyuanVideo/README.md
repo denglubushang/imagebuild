@@ -1,66 +1,22 @@
-# HunyuanVideo Docker 镜像
+# Run HunyuanVideo on Novita AI
+## What is HunyuanVideo
+A novel open-source video foundation model that exhibits performance in video generation that is comparable to, if not superior to, leading closed-source models. In order to train HunyuanVideo model, we adopt several key technologies for model learning, including data curation, image-video joint model training, and an efficient infrastructure designed to facilitate large-scale model training and inference. Additionally, through an effective strategy for scaling model architecture and dataset, we successfully trained a video generative model with over 13 billion parameters, making it the largest among all open-source models.
+## HunyuanVideo Overall Architecture
+HunyuanVideo is trained on a spatial-temporally compressed latent space, which is compressed through a Causal 3D VAE. Text prompts are encoded using a large language model, and used as the conditions. Taking Gaussian noise and the conditions as input, our generative model produces an output latent, which is then decoded to images or videos through the 3D VAE decoder.
+## Features
+### Unified Image and Video Generative Architecture
+HunyuanVideo introduces the Transformer design and employs a Full Attention mechanism for unified image and video generation. Specifically, we use a "Dual-stream to Single-stream" hybrid model design for video generation. In the dual-stream phase, video and text tokens are processed independently through multiple Transformer blocks, enabling each modality to learn its own appropriate modulation mechanisms without interference. In the single-stream phase, we concatenate the video and text tokens and feed them into subsequent Transformer blocks for effective multimodal information fusion. This design captures complex interactions between visual and semantic information, enhancing overall model performance.
+### MLLM Text Encoder  MLLM
+Some previous text-to-video models typically use pre-trained CLIP and T5-XXL as text encoders where CLIP uses Transformer Encoder and T5 uses an Encoder-Decoder structure. In contrast, we utilize a pre-trained Multimodal Large Language Model (MLLM) with a Decoder-Only structure as our text encoder, which has the following advantages: 
+(i) Compared with T5, MLLM after visual instruction finetuning has better image-text alignment in the feature space, which alleviates the difficulty of the instruction following in diffusion models; 
+(ii) Compared with CLIP, MLLM has demonstrated superior ability in image detail description and complex reasoning; 
+(iii) MLLM can play as a zero-shot learner by following system instructions prepended to user prompts, helping text features pay more attention to key information. 
+In addition, MLLM is based on causal attention while T5-XXL utilizes bidirectional attention that produces better text guidance for diffusion models. Therefore, we introduce an extra bidirectional token refiner to enhance text features.
+### 3D VAE
+HunyuanVideo trains a 3D VAE with CausalConv3D to compress pixel-space videos and images into a compact latent space. We set the compression ratios of video length, space, and channel to 4, 8, and 16 respectively. This can significantly reduce the number of tokens for the subsequent diffusion transformer model, allowing us to train videos at the original resolution and frame rate.
+## Run HunyuanVideo on Novita AI
+step 1:Console Entry  
+Launch the GPU interface and select Get Started to access deployment management.
 
-这是一个包含HunyuanVideo文本到视频生成模型的Docker镜像，基于ComfyUI构建。
-
-## 功能特性
-
-- 基于PyTorch 2.7.1和CUDA 12.8
-- 预装HunyuanVideo模型（720p版本）
-- 包含所有必要的文本编码器和VAE模型
-- 集成Jupyter Lab环境
-- SSH服务支持
-- 使用Supervisor管理服务
-
-## 构建镜像
-
-```bash
-docker build -t hunyuanvideo:latest .
-```
-
-## 运行容器
-
-```bash
-docker run -d \
-  --name hunyuanvideo \
-  --gpus all \
-  -p 8188:8188 \
-  -p 8888:8888 \
-  -p 2222:22 \
-  -v /path/to/output:/root/ComfyUI/output \
-  hunyuanvideo:latest
-```
-
-## 端口说明
-
-- `8188`: ComfyUI Web界面
-- `8888`: Jupyter Lab
-- `2222`: SSH服务
-
-## 环境变量
-
-- `JUPYTER_PASSWORD`: Jupyter密码（默认：1234567890）
-- `JUPYTER_PORT`: Jupyter端口（默认：8888）
-- `SSH_PASSWORD`: SSH密码
-- `SSH_PUBLIC_KEY`: SSH公钥
-
-## 使用方法
-
-1. 访问 `http://localhost:8188` 进入ComfyUI界面
-2. 加载预配置的工作流文件 `hunyuanvideo_workflow.json`
-3. 修改文本提示词
-4. 点击运行生成视频
-
-## 模型文件
-
-镜像包含以下预下载的模型文件：
-
-- `hunyuan_video_t2v_720p_bf16.safetensors`: 主模型（720p版本）
-- `clip_l.safetensors`: CLIP文本编码器
-- `llava_llama3_fp8_scaled.safetensors`: LLaVA文本编码器
-- `hunyuan_video_vae_bf16.safetensors`: VAE模型
-
-## 注意事项
-
-- 需要NVIDIA GPU支持
-- 建议使用至少16GB显存
-- 首次运行可能需要下载额外的模型文件 
+step 2:Package Selection
+Locate Wan2.1-vace-1.3B in the template repository and begin installation sequence.

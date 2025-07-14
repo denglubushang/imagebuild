@@ -1,37 +1,16 @@
-FROM nvidia/cuda:12.4.1-base-ubuntu22.04
-ENV DEBIAN_FRONTEND noninteractive
-ENV CMDARGS --listen
+FROM ghcr.io/lllyasviel/fooocus:edge
 
-RUN apt-get update -y && \
-	apt-get install -y curl libgl1 libglib2.0-0 python3-pip python-is-python3 git && \
-	apt-get clean && \
-	rm -rf /var/lib/apt/lists/*
+RUN apt update -y && apt install -y aria2 && apt clean
 
-COPY requirements_docker.txt requirements_versions.txt /tmp/
-RUN pip install --no-cache-dir -r /tmp/requirements_docker.txt -r /tmp/requirements_versions.txt && \
-	rm -f /tmp/requirements_docker.txt /tmp/requirements_versions.txt
-RUN pip install --no-cache-dir xformers==0.0.23 --no-dependencies
-RUN curl -fsL -o /usr/local/lib/python3.10/dist-packages/gradio/frpc_linux_amd64_v0.2 https://cdn-media.huggingface.co/frpc-gradio-0.2/frpc_linux_amd64 && \
-	chmod +x /usr/local/lib/python3.10/dist-packages/gradio/frpc_linux_amd64_v0.2
+RUN cd /content/app/models/vae_approx/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/lllyasviel/misc/resolve/main/xlvaeapp.pth -o xlvaeapp.pth
 
-RUN adduser --disabled-password --gecos '' user && \
-	mkdir -p /content/app /content/data
+RUN cd /content/app/models/vae_approx/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/lllyasviel/misc/resolve/main/vaeapp_sd15.pt -o vaeapp_sd15.pt
 
-COPY entrypoint.sh /content/
-RUN chown -R user:user /content
+RUN cd /content/app/models/vae_approx/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/mashb1t/misc/resolve/main/xl-to-v1_interposer-v4.0.safetensors -o xl-to-v1_interposer-v4.0.safetensors
 
-WORKDIR /content
-USER user
+RUN cd /content/app/models/prompt_expansion/fooocus_expansion/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/lllyasviel/misc/resolve/main/fooocus_expansion.bin -o pytorch_model.bin
 
+RUN cd /content/data/models/checkpoints/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/juggernautXL_v8Rundiffusion.safetensors -o juggernautXL_v8Rundiffusion.safetensors
 
-# 克隆Fooocus仓库到临时目录
-RUN git clone --depth=1 https://github.com/lllyasviel/Fooocus.git /tmp/fooocus
+RUN cd /content/data/models/loras/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_offset_example-lora_1.0.safetensors -o sd_xl_offset_example-lora_1.0.safetensors
 
-# 复制应用代码到目标目录
-RUN cp -r /tmp/fooocus/* /content/app/ && \
-    mv /content/app/models /content/app/models.org
-
-# 清理临时文件
-RUN rm -rf /tmp/fooocus
-
-CMD [ "sh", "-c", "/content/entrypoint.sh ${CMDARGS}" ]
