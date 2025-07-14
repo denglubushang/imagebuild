@@ -5,6 +5,12 @@ USER root
 
 RUN apt update -y && apt install -y aria2 && apt clean
 
+# 创建必要的目录结构
+RUN mkdir -p /content/app/models/vae_approx/ && \
+    mkdir -p /content/app/models/prompt_expansion/fooocus_expansion/ && \
+    mkdir -p /content/data/models/checkpoints/ && \
+    mkdir -p /content/data/models/loras/
+
 RUN cd /content/app/models/vae_approx/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/lllyasviel/misc/resolve/main/xlvaeapp.pth -o xlvaeapp.pth
 
 RUN cd /content/app/models/vae_approx/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/lllyasviel/misc/resolve/main/vaeapp_sd15.pt -o vaeapp_sd15.pt
