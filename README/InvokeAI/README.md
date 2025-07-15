@@ -1,5 +1,5 @@
 # Run InvokeAI on Novita AI
-## What is 
+## What is InvokeAI
 Invoke is a leading creative engine built to empower professionals and enthusiasts alike. Generate and create stunning visual media using the latest AI-driven technologies. Invoke offers an industry leading web-based UI, and serves as the foundation for multiple commercial products.
 ## Features
 ### Web Server & UI
