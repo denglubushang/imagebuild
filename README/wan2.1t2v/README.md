@@ -46,6 +46,6 @@ Your Wan2.1-1.3B-t2v environment is prepared for advanced development tasks. Not
 Step 1: Click on 'connection to HTTP server[Port 8188]' in the Connect interface,and you will enter the corresponding service
 ![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/bc288b38-ebe7-4a70-ab07-227bb5fbd500/public)  
 Step 2: Select the provided basic workflow for testing
-![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/541db94b-ccb5-4ad7-d0a2-f02eda705f00/public)  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/fbdcf7d6-3842-4896-bb92-809e6e312d00/public)  
 ### Advanced Usage
 You can learn detailed usage instructions in the [official documentation of Comfyui](https://docs.comfy.org/)  

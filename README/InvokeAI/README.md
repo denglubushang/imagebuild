@@ -60,4 +60,4 @@ Step 4: Some downloads require the HuggingFace URL token, which can be set in th
 Step 5: Afterwards, in the generation interface, you can enter text and select a Prompt Template, then click Invoke to generate an image  
 ![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/0569b9a6-c354-4530-7c63-1e5982a69b00/public)  
 ### Advanced Usage
-You can learn more usage methods in the [official documentation of Invoke AI](https://invoke-ai.github.io/InvokeAI/)  
+You can learn more usage methods in the [official documentation of InvokeAI](https://invoke-ai.github.io/InvokeAI/)  
