@@ -21,33 +21,33 @@ Launch the GPU interface and select Get Started to access deployment management.
 
 Step 2: Package Selection  
 Locate HunyuanVideo in the template repository and begin installation sequence.
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/78b7e094-7f57-4424-3478-2bb645d3d500/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/f75ad6c2-4382-4b8e-b249-719136832200/public)  
 Step 3: Infrastructure Setup  
 Configure computing parameters including memory allocation, storage requirements, and network settings. Select Deploy to implement.
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/120ac44e-039b-4071-14a6-ee6bf7132400/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/e60769af-adbf-4a0e-7c20-f3c7e69ed900/public)  
 Step 4: Review and Create  
 Double-check your configuration details and cost summary. When satisfied, click Deploy to start the creation process.
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/f5be2e66-420e-4d1d-a1b4-5309edb8dd00/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/05c582fc-8680-4466-c6f6-4cff8da18c00/public)  
 Step 5: Wait for Creation  
 After initiating deployment, the system will automatically redirect you to the instance management page. Your instance will be created in the background.
-![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/ff771c16-1c95-4de4-bf61-fe765635f500/public)  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/dbe97358-89d4-4b8d-45d0-bd28539e2500/public)  
 Step 6: Monitor Download Progress  
 Track the image download progress in real-time. Your instance status will change from Pulling to Running once deployment is complete. You can view detailed progress by clicking the arrow icon next to your instance name.
-![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/0c77a1e6-113b-4f6a-c743-03e5a855ed00/public)  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/8fc92cff-9de7-4615-a64a-30928c8f5200/public)  
 Step 7: Verify Instance Status  
 Click the Logs button to view instance logs and confirm that the Comfyui service has started properly.
-![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/60c3c84e-7c82-4141-d651-81ab37729b00/public)  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/7955ab29-e812-4ab8-8a34-08884ebb3100/public)  
 Step 8: Environment Access  
 Launch development space through Connect interface, then initialize Start Web Terminal.
-![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/8a29c4c6-4cbf-475f-bfd6-8060b18dfe00/public)  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/ebeb7c75-3599-4565-3ec8-f6682a3cc400/public)  
 Step 9: Development Ready  
 Your HunyuanVideo environment is prepared for advanced development tasks. Note: Suspend instance when inactive to preserve computing resources.
-![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/9a976cb8-41e4-44e2-1989-dca45b61ff00/public)  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/057b2121-9fac-47a6-cfca-eaa026d7de00/public)  
 ## How to use
 ### Demo
 Step 1: Click on 'connection to HTTP server[Port 8188]' in the Connect interface,and you will enter the corresponding service
-![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/1ed50c15-edd9-43e9-f765-11fd6d86bb00/public)  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/4911e916-e194-4b4c-7e99-8358529f2900/public)  
 Step 2: Select the provided basic workflow for testing
 ![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/33894eb6-ae09-41a1-a54f-56816f7f7200/public)  
 ### Advanced Usage
-You can learn detailed usage instructions in the [official documentation of Comfyui](https://docs.comfy.org/)  
+You can learn detailed usage instructions in the [official documentation of Comfyui](https://docs.comfy.org/)

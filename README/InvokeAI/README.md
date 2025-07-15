@@ -1,6 +1,6 @@
 # Run InvokeAI on Novita AI
 ## What is InvokeAI
-Invoke is a leading creative engine built to empower professionals and enthusiasts alike. Generate and create stunning visual media using the latest AI-driven technologies. Invoke offers an industry leading web-based UI, and serves as the foundation for multiple commercial products.
+Invoke是一款领先的创意引擎，旨在为专业人士和爱好者提供支持。使用最新的人工智能驱动技术生成和创建令人惊叹的视觉媒体。Invoke提供了业界领先的基于web的UI，并作为多种商业产品的基础。
 ## Features
 ### Web Server & UI
 Invoke runs a locally hosted web server & React UI with industry-leading user experience.
@@ -25,32 +25,32 @@ Launch the GPU interface and select Get Started to access deployment management.
 
 Step 2: Package Selection  
 Locate InvokeAI in the template repository and begin installation sequence.  
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/1b50b81b-9564-4ef9-868c-203225349e00/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/f7d18fb0-51cd-4cfa-0c8d-2df614aa8500/public)  
 Step 3: Infrastructure Setup  
 Configure computing parameters including memory allocation, storage requirements, and network settings. Select Deploy to implement.  
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/c9f01150-6ee3-4243-e4ff-67d04333ce00/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/8c194338-4f88-4105-9971-67f96bbdc400/public)  
 Step 4: Review and Create  
 Double-check your configuration details and cost summary. When satisfied, click Deploy to start the creation process.  
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/9a6191aa-1e42-434b-9aa8-017a8bd42300/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/84d3ff93-0164-4f92-ac8a-b3aa7c632800/public)  
 Step 5: Wait for Creation  
 After initiating deployment, the system will automatically redirect you to the instance management page. Your instance will be created in the background.  
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/0c3b4fe3-76bf-4176-0181-e6d5dd215300/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/823b288d-4b82-4aa7-ebfc-db35dc6d9000/public)  
 Step 6: Monitor Download Progress  
 Track the image download progress in real-time. Your instance status will change from Pulling to Running once deployment is complete. You can view detailed progress by clicking the arrow icon next to your instance name.  
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/5b3a38f4-a3fa-4105-c919-d0625d8f7b00/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/95c820af-e941-41d6-6ea1-60211889d800/public)  
 Step 7: Verify Instance Status  
 Click the Logs button to view instance logs and confirm that the Comfyui service has started properly.  
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/661cea40-73d7-4a82-e911-c6532a059c00/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/3832e032-c72f-497d-7cbe-a37a4751b000/public)  
 Step 8: Environment Access  
 Launch development space through Connect interface, then initialize Start Web Terminal.  
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/bdc97306-9c41-4c2c-00e5-938fd6bd2d00/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/62a524e2-c748-4c49-26aa-5e9de734d000/public)  
 Step 9: Development Ready  
 Your InvokeAI environment is prepared for advanced development tasks. Note: Suspend instance when inactive to preserve computing resources.  
-![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/ea656f9d-0f82-4f68-63df-fce9a3f1a900/public)  
+![enter image description here](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/0d369df0-8547-4600-970b-3c8da0f2a600/public)  
 ## How to use
 ### Demo
 Step 1: Click on 'connection to HTTP server[Port 9090]' in the Connect interface,and you will enter the corresponding service  
-![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/d5fea4e0-4c0d-4da7-13db-85900612c100/public)  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/185ea096-e7fd-4fb4-6623-b658478e9c00/public)  
 Step 2: Entering the service interface, you can first browse the quick launch model bundle package in the model management interface and select an installation (various functions require model files as the basis, and this template does not pre fabricate the initial model)  
 ![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/d8d408c2-7969-4747-ee45-a74974202900/public)  
 Step 3: After selecting an installation package, its progress will be displayed in the install queue  
