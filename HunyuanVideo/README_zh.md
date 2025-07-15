@@ -17,19 +17,6 @@
 docker build -t hunyuanvideo:latest .
 ```
 
-## 运行容器
-
-```bash
-docker run -d \
-  --name hunyuanvideo \
-  --gpus all \
-  -p 8188:8188 \
-  -p 8888:8888 \
-  -p 2222:22 \
-  -v /path/to/output:/root/ComfyUI/output \
-  hunyuanvideo:latest
-```
-
 ## 端口说明
 
 - `8188`: ComfyUI Web界面
