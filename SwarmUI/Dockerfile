@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y \
     git \
     wget \
     curl \
+    python3-pip\
+    python3-venv\
     ca-certificates \
     build-essential \
     libicu70 \
