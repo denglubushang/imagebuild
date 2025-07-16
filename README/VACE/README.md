@@ -41,6 +41,13 @@ Step 9: Development Ready
 Your Wan2.1-VACE-1.3B environment is prepared for advanced development tasks. Note: Suspend instance when inactive to preserve computing resources.
 ![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/17facaca-aa02-4ad5-da83-8aa16d244e00/public)  
 ## How to use
+### Template details
+This template calls the HunyuanVideo model through the Comfyui service and includes the Jupyter application. Comfyui and Jupyter services are both regulated through supervisor
+### Process management
+- You can use supervisorctl in Web Terminal to enter the interactive command-line interface. Here are some command usage demonstrations. For more usage, please feel free to view them yourself if you are interested.  
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/9d03178d-6be1-4516-cf29-0e86776a9e00/public)
+- The startup script for Comfyui can be found in the ```/opt/supervisor``` directory. This template comfyui service is bound by default to the default 8188 port at address 0.0.0.0. You can use the ```python3 ~/ComfyUI/main.Py -h ```command to view more detailed startup configurations. After changing the script, restart the comfyui service using the supervisortl restart command to ensure that the comfyui service status is running.
+![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/0a957eaf-a97f-4075-31de-e731d8a15400/public)
 ### Demo
 Step 1: Click on 'connection to HTTP server[Port 8188]' in the Connect interface,and you will enter the corresponding service
 ![](https://imagedelivery.net/GFvwKVAtCfKnMHdvDobR4A/e5998040-499c-421e-2a95-3ad52939df00/public)  
