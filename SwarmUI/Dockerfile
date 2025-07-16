@@ -1,60 +1,32 @@
-# SwarmUI Dockerfile
-FROM ubuntu:22.04
-
-# 设置环境变量
+FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
 ENV DEBIAN_FRONTEND=noninteractive
-ENV DOTNET_ROOT=/opt/dotnet
-ENV PATH="$DOTNET_ROOT:$PATH"
-ENV ASPNETCORE_URLS=http://+:7801
-ENV SWARMUI_HOST=0.0.0.0
-ENV SWARMUI_PORT=7801
+ENV PYTHONUNBUFFERED=1
 
-# 安装系统依赖
-RUN apt-get update && apt-get install -y \
-    git \
-    wget \
-    curl \
-    python3-pip\
-    python3-venv\
-    ca-certificates \
-    build-essential \
-    libicu70 \
-    libssl3 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt update -y && apt install -y supervisor && \
+    mkdir -p /var/log/supervisord && \
+    mkdir -p /opt/supervisor && \
+    apt clean \
 
-# 创建工作目录
-WORKDIR /app
+# install system packages
+RUN apt update -y && apt install -y \
+        python3 python-is-python3 python3-pip python3-venv wget\
+        git aria2 && \
+    apt clean
 
-# 下载 SwarmUI 源码
-RUN git clone https://github.com/mcmonkeyprojects/SwarmUI.git && \
-    cd SwarmUI
+# install jupyter
+RUN pip install jupyter && \
+    pip install nvitop && \
+    pip cache purge
+COPY jupyter/jupyter.sh   /opt/supervisor/jupyter.sh
+COPY jupyter/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 
-# 设置工作目录为 SwarmUI
-WORKDIR /app/SwarmUI
+RUN cd /root && wget https://github.com/mcmonkeyprojects/SwarmUI/releases/download/0.6.5-Beta/install-linux.sh -O install-linux.sh && \
+    chmod +x install-linux.sh && \
+    ./install-linux.sh
 
-# 下载并安装 .NET
-RUN cd launchtools && \
-    rm -f dotnet-install.sh && \
-    wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
-    chmod +x dotnet-install.sh && \
-    cd ..
+WORKDIR /root/SwarmUI
 
-# 安装 .NET 8.0 运行时和 SDK
-RUN ./launchtools/dotnet-install.sh --channel 8.0 --runtime aspnetcore --install-dir $DOTNET_ROOT && \
-    ./launchtools/dotnet-install.sh --channel 8.0 --install-dir $DOTNET_ROOT
+COPY swarmui/swarmui.sh         /opt/supervisor/swarmui.sh
+COPY swarmui/swarmui.conf       /etc/supervisor/conf.d/swarmui.conf
 
-# 创建非root用户
-RUN groupadd -r swarmui && useradd -r -g swarmui -d /app swarmui
-
-# 设置权限
-RUN chown -R swarmui:swarmui /app
-
-# 切换到非root用户
-USER swarmui
-
-# 暴露端口
-EXPOSE 7801
-
-# 启动命令
-CMD ["./launch-linux.sh", "--host", "0.0.0.0", "--port", "7801"]
+CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
