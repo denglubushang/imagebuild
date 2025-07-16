@@ -1,4 +1,12 @@
 #!/bin/bash
+
+# 首次运行时执行安装
+if [ ! -f "/root/SwarmUI/src/SwarmUI.csproj" ]; then
+    echo "首次启动，正在安装SwarmUI..."
+    cd /root
+    ./install-linux.sh --launch-mode none
+fi
+
 cd /root/SwarmUI
 
 # 等待系统完全启动
