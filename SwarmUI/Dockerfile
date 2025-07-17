@@ -5,11 +5,11 @@ ENV PYTHONUNBUFFERED=1
 RUN apt update -y && apt install -y supervisor && \
     mkdir -p /var/log/supervisord && \
     mkdir -p /opt/supervisor && \
-    apt clean \
+    apt clean
 
 # install system packages
 RUN apt update -y && apt install -y \
-        python3 python-is-python3 python3-pip python3-venv wget\
+        python3 python-is-python3 python3-pip python3-venv wget \
         git aria2 curl && \
     apt clean
 
@@ -28,6 +28,16 @@ WORKDIR /root/SwarmUI
 
 COPY swarmui/swarmui.sh         /opt/supervisor/swarmui.sh
 COPY swarmui/swarmui.conf       /etc/supervisor/conf.d/swarmui.conf
+
+# 确保启动脚本有执行权限
+RUN chmod +x /opt/supervisor/swarmui.sh
+
+# 设置DotNET环境变量
+ENV DOTNET_ROOT=/root/SwarmUI/.dotnet
+ENV PATH="$DOTNET_ROOT:$PATH"
+
+# 暴露端口
+EXPOSE 7801 8888
 
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 
