@@ -24,10 +24,12 @@ COPY jupyter/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 COPY install.sh /root/install.sh
 RUN chmod +x /root/install.sh && /root/install.sh
 
-WORKDIR /root/SwarmUI
+# 创建SwarmUI配置目录
+RUN mkdir -p /root/SwarmUI/Data
 
 COPY swarmui/swarmui.sh         /opt/supervisor/swarmui.sh
 COPY swarmui/swarmui.conf       /etc/supervisor/conf.d/swarmui.conf
+COPY swarmui/settings.json      /root/SwarmUI/Data/settings.json
 
 # 确保启动脚本有执行权限
 RUN chmod +x /opt/supervisor/swarmui.sh
@@ -35,6 +37,11 @@ RUN chmod +x /opt/supervisor/swarmui.sh
 # 设置DotNET环境变量
 ENV DOTNET_ROOT=/root/SwarmUI/.dotnet
 ENV PATH="$DOTNET_ROOT:$PATH"
+
+# 设置SwarmUI的ComfyUI后端配置
+ENV SWARMUI_COMFYUI_HOST=0.0.0.0
+ENV SWARMUI_HOST=0.0.0.0
+ENV COMFYUI_LISTEN=0.0.0.0
 
 # 暴露端口
 EXPOSE 7801 8888

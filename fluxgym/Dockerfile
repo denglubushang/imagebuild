@@ -1,52 +1,43 @@
-# Base image with CUDA 12.2
-FROM nvidia/cuda:12.2.2-base-ubuntu22.04
+FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
 
-# Install pip if not already installed
-RUN apt-get update -y && apt-get install -y \
-    python3-pip \
-    python3-dev \
-    git \
-    build-essential  # Install dependencies for building extensions
+# for China
+# RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak && \
+#    sed -i 's#http://.*.ubuntu.com/#http://mirrors.tuna.tsinghua.edu.cn/#' /etc/apt/sources.list
+# install supervisord
+RUN apt update -y && apt install -y supervisor && \
+    mkdir -p /var/log/supervisord && \
+    mkdir -p /opt/supervisor && \
+    apt clean \
 
-# Define environment variables for UID and GID and local timezone
-ENV PUID=${PUID:-1000}
-ENV PGID=${PGID:-1000}
+# install system packages
+RUN apt update -y && apt install -y \
+        python3 python-is-python3 python3-pip wget\
+        git aria2 && \
+    apt clean
 
-# Create a group with the specified GID
-RUN groupadd -g "${PGID}" appuser
-# Create a user with the specified UID and GID
-RUN useradd -m -s /bin/sh -u "${PUID}" -g "${PGID}" appuser
+# install jupyter
+RUN pip install jupyter && \
+    pip install nvitop && \
+    pip cache purge
+COPY jupyter/jupyter.sh   /opt/supervisor/jupyter.sh
+COPY jupyter/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 
-WORKDIR /app
+RUN git clone https://github.com/cocktailpeanut/fluxgym.git /app/fluxgym && \
+    git clone -b sd3 https://github.com/kohya-ss/sd-scripts /app/fluxgym/sd-scripts && \
+    cd /app/fluxgym/sd-scripts && \
+    pip install -r requirements.txt && \
+    cd /app/fluxgym && \
+    pip install -r requirements.txt
 
-# Get sd-scripts from kohya-ss and install them
-RUN git clone -b sd3 https://github.com/kohya-ss/sd-scripts && \
-    cd sd-scripts && \
-    pip install --no-cache-dir -r ./requirements.txt && \
-    cd .. && \
-    rm -rf sd-scripts
-
-# Clone fluxgym repository
-RUN git clone https://github.com/cocktailpeanut/fluxgym
-
-# Install main application dependencies
-RUN cd fluxgym && pip install --no-cache-dir -r ./requirements.txt
-
-# Install Torch, Torchvision, and Torchaudio for CUDA 12.2
-RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu122/torch_stable.html
-
-# Set ownership after all installations
-RUN chown -R appuser:appuser /app
-
-# Switch to non-root user
-USER appuser
-
-# Copy fluxgym application code
-EXPOSE 7860
-
-ENV GRADIO_SERVER_NAME="0.0.0.0"
+# Downloading models
+RUN wget -O /app/fluxgym/models/unet/flux1-dev.sft https://huggingface.co/cocktailpeanut/xulf-dev/resolve/main/flux1-dev.sft?download=true && \
+    wget -O /app/fluxgym/models/unet/flux1-schnell.safetensors https://huggingface.co/cocktailpeanut/xulf-schnell/resolve/main/flux1-schnell.safetensors?download=true && \
+    wget -O /app/fluxgym/models/clip/clip_l.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors?download=true && \
+    wget -O /app/fluxgym/models/clip/t5xxl_fp16.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors?download=true && \
+    wget -O /app/fluxgym/models/vae/ae.sft https://huggingface.co/cocktailpeanut/xulf-dev/resolve/main/ae.sft?download=true
 
 WORKDIR /app/fluxgym
+CMD ["python3", "/app/fluxgym/app.py"]
 
-# Run fluxgym Python application
-CMD ["python3", "./app.py"]
