@@ -51,6 +51,8 @@ WORKDIR /app/fluxgym
 RUN pip install --pre torch==2.4 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 COPY app.py /app/fluxgym/app.py
+COPY fluxgym/fluxgym.sh /opt/supervisor/fluxgym.sh
+COPY fluxgym/fluxgym.conf /etc/supervisor/conf.d/fluxgym.conf
 
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 
