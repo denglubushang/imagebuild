@@ -1,6 +1,14 @@
 FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
+
+# 设置环境变量
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app/fluxgym
+
+# 代理设置（如果需要）
+# ENV HTTP_PROXY=http://your-proxy:port
+# ENV HTTPS_PROXY=http://your-proxy:port
+# ENV NO_PROXY=localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
 
 # for China
 # RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak && \
@@ -9,11 +17,11 @@ ENV PYTHONUNBUFFERED=1
 RUN apt update -y && apt install -y supervisor && \
     mkdir -p /var/log/supervisord && \
     mkdir -p /opt/supervisor && \
-    apt clean \
+    apt clean
 
 # install system packages
 RUN apt update -y && apt install -y \
-        python3 python-is-python3 python3-pip wget\
+        python3 python-is-python3 python3-pip wget \
         git aria2 && \
     apt clean
 
