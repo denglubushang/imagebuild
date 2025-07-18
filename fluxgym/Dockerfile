@@ -47,5 +47,10 @@ RUN wget -O /app/fluxgym/models/unet/flux1-dev.sft https://huggingface.co/cockta
     wget -O /app/fluxgym/models/vae/ae.sft https://huggingface.co/cocktailpeanut/xulf-dev/resolve/main/ae.sft?download=true
 
 WORKDIR /app/fluxgym
-CMD ["python3", "/app/fluxgym/app.py"]
+
+RUN pip install --pre torch==2.4 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+COPY app.py /app/fluxgym/app.py
+
+CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 
