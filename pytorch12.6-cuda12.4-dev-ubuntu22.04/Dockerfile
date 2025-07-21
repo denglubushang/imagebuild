@@ -5,7 +5,8 @@ ENV PYTHONUNBUFFERED=1
 # install system packages
 RUN apt update -y && apt install -y \
         python3 python-is-python3 python3-pip python3-venv wget \
-        git aria2 curl 
+        git aria2 curl ss vim && \
+    apt clean
 
 RUN pip install jupyter && \
     pip install nvitop
