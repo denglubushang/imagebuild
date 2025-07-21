@@ -1,4 +1,4 @@
-# 启动 Jupyter Lab，设置默认参数
+# launch Jupyter Lab
 if [ "$JUPYTER_PASSWORD" == "" ]; then
     JUPYTER_PASSWORD="1234567890"
 fi

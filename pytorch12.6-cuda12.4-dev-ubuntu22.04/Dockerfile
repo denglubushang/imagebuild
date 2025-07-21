@@ -9,9 +9,10 @@ RUN apt update -y && apt install -y \
         sudo bzip2 libx11-6 vim net-tools iproute2 && \
     apt clean
 
-
+# install jupyter and nvitop
 RUN pip install jupyter && \
-    pip install nvitop
+    pip install nvitop && \
+    pip cache purge
 
 WORKDIR /root
 
