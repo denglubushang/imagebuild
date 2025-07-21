@@ -20,11 +20,10 @@ RUN pip install jupyter && \
 COPY jupyter/jupyter.sh   /opt/supervisor/jupyter.sh
 COPY jupyter/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 
-# 下载并准备SwarmUI，但不在构建时运行
+# Download SwarmUI
 COPY install.sh /root/install.sh
 RUN chmod +x /root/install.sh && /root/install.sh
 
-# 创建SwarmUI配置目录
 RUN mkdir -p /root/SwarmUI/Data
 
 COPY swarmui/swarmui.sh         /opt/supervisor/swarmui.sh
