@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel
+FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
@@ -9,9 +9,9 @@ RUN apt update -y && apt install -y \
         sudo bzip2 libx11-6 vim net-tools iproute2 && \
     apt clean
 
-
 RUN pip install jupyter && \
-    pip install nvitop
+    pip install nvitop && \
+    pip cache purge
 
 WORKDIR /root
 

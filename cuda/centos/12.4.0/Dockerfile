@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel
+FROM nvidia/cuda:12.4.0-devel-centos7
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
@@ -8,10 +8,6 @@ RUN apt update -y && apt install -y \
         git git-lfs curl wget ca-certificates \
         sudo bzip2 libx11-6 vim net-tools iproute2 && \
     apt clean
-
-
-RUN pip install jupyter && \
-    pip install nvitop
 
 WORKDIR /root
 
