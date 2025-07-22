@@ -1,6 +1,10 @@
 FROM nvidia/cuda:12.4.0-devel-centos7
 ENV PYTHONUNBUFFERED=1
 
+# replace mirror
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*.repo && \
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*.repo
+
 # install system packages
 RUN yum update -y && yum install -y \
         python3 python3-pip \
