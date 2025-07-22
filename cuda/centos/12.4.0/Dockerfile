@@ -8,11 +8,13 @@ RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*.repo && \
 # install system packages
 RUN yum update -y && yum install -y \
         python3 python3-pip \
+        python3-devel gcc gcc-c++ make \
         git curl wget ca-certificates \
         sudo bzip2 libX11 vim net-tools iproute && \
     yum clean all
 
-RUN pip3 install jupyter && \
+RUN pip3 install --upgrade pip setuptools wheel && \
+    pip3 install jupyter && \
     pip3 install nvitop && \
     pip3 cache purge
 
