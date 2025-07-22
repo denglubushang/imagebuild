@@ -14,7 +14,7 @@ RUN yum update -y && yum install -y \
     yum clean all
 
 RUN pip3 install --upgrade pip setuptools wheel && \
-    pip3 install jupyter && \
+    pip3 install jupyter jupyterlab && \
     pip3 install nvitop && \
     pip3 cache purge
 

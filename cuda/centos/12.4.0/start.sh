@@ -1,4 +1,3 @@
-# launch Jupyter Lab
 if [ "$JUPYTER_PASSWORD" == "" ]; then
     JUPYTER_PASSWORD="1234567890"
 fi
