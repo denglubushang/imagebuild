@@ -54,9 +54,9 @@ COPY comfyui/comfyui.sh         /opt/supervisor/comfyui.sh
 COPY comfyui/comfyui.conf       /etc/supervisor/conf.d/comfyui.conf
 
 #Copy wan2.1vace default workflow
-# COPY comfyui/wan_vace_i2v.json /root/ComfyUI/user/default/workflows/wan_vace_i2v.json
-# COPY comfyui/wan_vace_t2v.json /root/ComfyUI/user/default/workflows/wan_vace_t2v.json
-# COPY comfyui/wan_vace_v2v.json /root/ComfyUI/user/default/workflows/wan_vace_v2v.json
+COPY comfyui/wan_vace_i2v.json /root/ComfyUI/user/default/workflows/wan_vace_i2v.json
+COPY comfyui/wan_vace_t2v.json /root/ComfyUI/user/default/workflows/wan_vace_t2v.json
+COPY comfyui/wan_vace_v2v.json /root/ComfyUI/user/default/workflows/wan_vace_v2v.json
 
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 # override defaultGraph.ts is useless, need to modify index-CaD4RONs.js 
