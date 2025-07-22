@@ -1,13 +1,16 @@
 FROM nvidia/cuda:12.4.0-devel-centos7
-ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
 # install system packages
-RUN apt update -y && apt install -y \
-        python3 python-is-python3 python3-pip \
-        git git-lfs curl wget ca-certificates \
-        sudo bzip2 libx11-6 vim net-tools iproute2 && \
-    apt clean
+RUN yum update -y && yum install -y \
+        python3 python3-pip \
+        git curl wget ca-certificates \
+        sudo bzip2 libX11 vim net-tools iproute && \
+    yum clean all
+
+RUN pip3 install jupyter && \
+    pip3 install nvitop && \
+    pip3 cache purge
 
 WORKDIR /root
 
