@@ -11,9 +11,9 @@ RUN apt update -y && apt install -y \
     apt clean
 
 RUN wget https://github.com/oobabooga/text-generation-webui/releases/download/v3.8/textgen-portable-3.8-linux-cuda12.4.zip && \
-    unzip textgen-portable-3.8-linux-cuda12.4.zip && \
+    unzip textgen-portable-3.8-linux-cuda12.4.zip -d /root/ && \
     rm textgen-portable-3.8-linux-cuda12.4.zip
 
-WORKDIR /root/text-generation-webui
+WORKDIR /root/text-generation-webui-3.8
 
-CMD ["/root/text-generation-webui/start_linux.sh"]
+CMD ["/root/text-generation-webui-3.8/start_linux.sh","--listen","--api"]
