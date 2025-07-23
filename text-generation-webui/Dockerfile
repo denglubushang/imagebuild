@@ -1,29 +1,18 @@
-# BUILDER
-FROM ubuntu:22.04
+FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /builder
-ARG TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-3.5;5.0;6.0;6.1;7.0;7.5;8.0;8.6+PTX}"
-ARG BUILD_EXTENSIONS="${BUILD_EXTENSIONS:-}"
-ARG APP_UID="${APP_UID:-6972}"
-ARG APP_GID="${APP_GID:-6972}"
+# install system packages
+RUN apt update -y && apt install -y \
+        python3 python-is-python3 python3-pip \
+        git git-lfs curl wget ca-certificates \
+        sudo bzip2 libx11-6 vim net-tools iproute2 && \
+    apt clean
 
-RUN apt update && \
-    apt install --no-install-recommends -y git vim build-essential python3-dev pip bash curl && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN wget https://github.com/oobabooga/text-generation-webui/releases/download/v3.8/textgen-portable-3.8-linux-cuda12.4.zip && \
+    unzip textgen-portable-3.8-linux-cuda12.4.zip && \
+    rm textgen-portable-3.8-linux-cuda12.4.zip
 
-WORKDIR /home/app/
+WORKDIR /root/text-generation-webui
 
-RUN git clone https://github.com/oobabooga/text-generation-webui.git 
-
-WORKDIR /home/app/text-generation-webui
-
-RUN rm -rf installer_files/conda installer_files/env installer_files/miniforge_installer.sh
-
-RUN GPU_CHOICE=A LAUNCH_AFTER_INSTALL=FALSE INSTALL_EXTENSIONS=TRUE ./start_linux.sh --verbose
-
-WORKDIR /home/app/text-generation-webui
-# set umask to ensure group read / write at runtime
-CMD umask 0002 && export HOME=/home/app/text-generation-webui && ./start_linux.sh --listen
+CMD ["/root/text-generation-webui/start_linux.sh"]
