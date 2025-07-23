@@ -43,6 +43,9 @@ RUN cd models/checkpoints/ && aria2c -k 1M -s 10 -x 10 https://huggingface.co/te
 COPY comfyui/comfyui.sh         /opt/supervisor/comfyui.sh
 COPY comfyui/comfyui.conf       /etc/supervisor/conf.d/comfyui.conf
 
+#Copy hunyuan3d-dit-v2 default workflow
+COPY comfyui/hunyuan3d-dit-v2.json /root/ComfyUI/user/default/workflows/hunyuan3d-dit-v2.json
+
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 # override defaultGraph.ts is useless, need to modify index-CaD4RONs.js 
 # COPY defaultGraph.ts /root/ComfyUI/web/scripts/defaultGraph.js
