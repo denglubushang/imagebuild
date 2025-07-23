@@ -6,7 +6,8 @@ ENV PYTHONUNBUFFERED=1
 RUN apt update -y && apt install -y \
         python3 python-is-python3 python3-pip \
         git git-lfs curl wget ca-certificates \
-        sudo bzip2 libx11-6 vim net-tools iproute2 && \
+        sudo bzip2 libx11-6 vim net-tools iproute2 \
+        unzip && \
     apt clean
 
 RUN wget https://github.com/oobabooga/text-generation-webui/releases/download/v3.8/textgen-portable-3.8-linux-cuda12.4.zip && \
