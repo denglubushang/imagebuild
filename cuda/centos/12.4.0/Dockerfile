@@ -13,10 +13,12 @@ RUN yum update -y && yum install -y \
         sudo bzip2 libX11 vim net-tools iproute && \
     yum clean all && \
     ln -sf /usr/bin/python3.6 /usr/bin/python3 && \
-    ln -sf /usr/bin/pip3.6 /usr/bin/pip3
+    ln -sf /usr/bin/pip3.6 /usr/bin/pip3 && \
+    ln -sf /usr/bin/python3.6 /usr/bin/python && \
+    ln -sf /usr/bin/pip3.6 /usr/bin/pip
 
 RUN pip3 install --upgrade pip setuptools wheel && \
-    pip3 install jupyter jupyterlab && \
+    pip3 install "jupyter<2.0" "jupyterlab<4.0" && \
     pip3 install nvitop && \
     pip3 cache purge
 
