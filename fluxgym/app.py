@@ -566,6 +566,10 @@ def get_samples(lora_name):
     except:
         return []
 
+def reset_training_button():
+    """重置训练按钮状态"""
+    return gr.Button(value="Start training", variant="primary")
+
 def start_training(
     base_model,
     lora_name,
@@ -637,6 +641,9 @@ def start_training(
         f.write(md)
 
     gr.Info(f"Training Complete. Check the outputs folder for the LoRA files.", duration=None)
+    
+    # 返回重置的按钮状态
+    yield gr.Button(value="Start training", variant="primary")
 
 
 def update(
@@ -883,6 +890,33 @@ function() {
       e.target.classList.add("clicked")
       e.target.innerHTML = "Training..."
     })
+    
+    // 训练完成后自动重置按钮状态
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            const buttons = node.querySelectorAll && node.querySelectorAll("#start_training");
+                            if (buttons && buttons.length > 0) {
+                                buttons.forEach(function(button) {
+                                    if (button.textContent === "Start training" && button.classList.contains("clicked")) {
+                                        button.classList.remove("clicked");
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
 
 }
 """
@@ -1109,11 +1143,11 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
             train_config,
             sample_prompts,
         ],
-        outputs=terminal,
+        outputs=[terminal, start],
     )
     do_captioning.click(fn=run_captioning, inputs=[images, concept_sentence] + caption_list, outputs=caption_list)
     demo.load(fn=loaded, js=js, outputs=[hf_token, hf_login, hf_logout, repo_owner])
     refresh.click(update, inputs=listeners, outputs=[train_script, train_config, dataset_folder])
 if __name__ == "__main__":
     cwd = os.path.dirname(os.path.abspath(__file__))
-    demo.launch(server_name="0.0.0.0",debug=True, show_error=True, allowed_paths=[cwd])
+    demo.launch(debug=True, show_error=True, allowed_paths=[cwd])
