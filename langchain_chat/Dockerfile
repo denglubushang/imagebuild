@@ -30,6 +30,10 @@ COPY jupyter/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 
 RUN pip install "langchain-chatchat[xinference]" -U
 
+WORKDIR /workspace/chatchat
+
+Run chatchat init 
+
 CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 # override defaultGraph.ts is useless, need to modify index-CaD4RONs.js 
 # COPY defaultGraph.ts /root/ComfyUI/web/scripts/defaultGraph.js

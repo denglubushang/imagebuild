@@ -5,7 +5,7 @@ if [ "$JUPYTER_PASSWORD" == "" ]; then
 fi
 
 if [ "$JUPYTER_PREFERRED_DIR" == "" ]; then
-    JUPYTER_PREFERRED_DIR="/root"
+    JUPYTER_PREFERRED_DIR="/workspace/chatchat"
 fi
 
 if [ "$JUPYTER_PORT" == "" ]; then
