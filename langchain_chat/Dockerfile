@@ -1,39 +1,43 @@
-FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
-ENV DEBIAN_FRONTEND=noninteractive
-ENV PYTHONUNBUFFERED=1
+# 基础镜像
+FROM python:3.11
+LABEL maintainer=Langchain-Chatchat
+WORKDIR /root
 
-# for China
-# RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak && \
-#    sed -i 's#http://.*.ubuntu.com/#http://mirrors.tuna.tsinghua.edu.cn/#' /etc/apt/sources.list
-# install supervisord
-RUN apt update -y && apt install -y supervisor && \
-    mkdir -p /var/log/supervisord && \
-    mkdir -p /opt/supervisor && \
-    apt clean \
+# 环境变量
+ENV CHATCHAT_ROOT=/root/chatchat_data
 
-# install system packages
-RUN apt update -y && apt install -y \
-        python3 python-is-python3 python3-pip \
-        git aria2 && \
-    apt clean
+# 初始化环境
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+RUN apt-get update -y && \
+    apt-get install -y git && \
+    apt-get install -y --no-install-recommends libgl1 libglib2.0-0 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade pip setuptools
+RUN pip install --index-url https://pypi.python.org/simple/ pipx && \
+    pipx install poetry --force
 
-# install jupyter
-RUN pip install jupyter && \
-    pip install nvitop  && \
-    pip cache purge
-COPY jupyter/jupyter.sh   /opt/supervisor/jupyter.sh
-COPY jupyter/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
+# Add poetry to PATH
+ENV PATH="/root/.local/bin:${PATH}"
 
-# for China
-# RUN python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip && \
-#     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+# 下载 Langchain-Chatchat
+RUN git clone https://github.com/chatchat-space/Langchain-Chatchat.git
 
-RUN pip install "langchain-chatchat[xinference]" -U
+# 安装依赖
+WORKDIR /root/Langchain-Chatchat/libs/chatchat-server
+RUN poetry config virtualenvs.create false
+RUN poetry install --with lint,test -E xinference
 
-WORKDIR /workspace/chatchat
+## 确保 Python 可以找到 chatchat 模块
+ENV PYTHONPATH="/root/Langchain-Chatchat/libs/chatchat-server:${PYTHONPATH}"
 
-Run chatchat init 
+# 初始化配置
+WORKDIR /root/Langchain-Chatchat/libs/chatchat-server/chatchat
+RUN python cli.py init
 
-CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
-# override defaultGraph.ts is useless, need to modify index-CaD4RONs.js 
-# COPY defaultGraph.ts /root/ComfyUI/web/scripts/defaultGraph.js
+# 初始化知识库文件
+ADD data.tar.gz $CHATCHAT_ROOT/
+
+EXPOSE 7861 8501
+ENTRYPOINT ["python", "cli.py", "start", "-a"]
