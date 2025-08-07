@@ -5,7 +5,7 @@ if [ "$JUPYTER_PASSWORD" == "" ]; then
 fi
 
 if [ "$JUPYTER_PREFERRED_DIR" == "" ]; then
-    JUPYTER_PREFERRED_DIR="/ultralytics/examples/tutorial.ipynb
+    JUPYTER_PREFERRED_DIR="/ultralytics/examples/tutorial.ipynb"
 fi
 
 if [ "$JUPYTER_PORT" == "" ]; then
