@@ -54,3 +54,6 @@ RUN uv pip install --system paddlepaddle x2paddle
 # Remove extra build files
 RUN rm -rf tmp /root/.config/Ultralytics/persistent_cache.json
 
+COPY jupyter.sh /ultralytics/jupyter.sh
+
+CMD ["/ultralytics/jupyter.sh"]
