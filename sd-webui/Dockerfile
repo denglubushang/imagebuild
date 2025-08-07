@@ -8,18 +8,19 @@ ENV can_run_as_root=1
 RUN apt update -y && apt install -y supervisor && \
     mkdir -p /var/log/supervisord && \
     mkdir -p /opt/supervisor && \
-    apt clean \
+    apt clean
 
 # install system packages
 RUN apt update -y && apt install -y \
-        wget git python3 python3-venv libgl1 libglib2.0-0 git-lfs && \
-        sudo bzip2 libx11-6 vim net-tools iproute2 && \
+        wget git python3 python3-venv libgl1 libglib2.0-0 git-lfs \
+        bzip2 libx11-6 vim net-tools iproute2 && \
     apt clean
 
 # install jupyter
 RUN pip install jupyter && \
     pip install nvitop && \
     pip cache purge
+    
 COPY jupyter/jupyter.sh   /opt/supervisor/jupyter.sh
 COPY jupyter/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 
