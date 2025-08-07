@@ -13,7 +13,10 @@ RUN git clone --recurse-submodules https://github.com/Akegarasu/lora-scripts
 WORKDIR /app/lora-scripts
 RUN pip install xformers==0.0.27.post2 --no-deps && pip install -r requirements.txt
 
-WORKDIR /app/lora-scripts/scripts
+WORKDIR /app/lora-scripts/scripts/dev
+RUN pip install -r requirements.txt
+
+WORKDIR /app/lora-scripts/scripts/stable
 RUN pip install -r requirements.txt
 
 WORKDIR /app/lora-scripts
