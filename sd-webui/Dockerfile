@@ -12,8 +12,8 @@ RUN apt update -y && apt install -y supervisor && \
 
 # install system packages
 RUN apt update -y && apt install -y \
-        wget git python3 python3-venv libgl1 libglib2.0-0 git-lfs \
-        bzip2 libx11-6 vim net-tools iproute2 && \
+        wget git python3 python3-venv python3-pip libgl1 libglib2.0-0 git-lfs \
+        bzip2 libx11-6 vim net-tools iproute2 curl && \
     apt clean
 
 # install jupyter
