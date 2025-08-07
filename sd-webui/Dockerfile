@@ -12,7 +12,8 @@ RUN apt update -y && apt install -y supervisor && \
 
 # install system packages
 RUN apt update -y && apt install -y \
-        wget git python3 python3-venv libgl1 libglib2.0-0 && \
+        wget git python3 python3-venv libgl1 libglib2.0-0 git-lfs && \
+        sudo bzip2 libx11-6 vim net-tools iproute2 && \
     apt clean
 
 # install jupyter
@@ -26,4 +27,11 @@ WORKDIR /root
 
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui
 
-COPY
+WORKDIR /root/stable-diffusion-webui
+
+RUN pip install -r requirements.txt
+
+COPY sd-webui/sd-webui.sh   /opt/supervisor/sd-webui.sh
+COPY sd-webui/sd-webui.conf /etc/supervisor/conf.d/sd-webui.conf
+
+CMD  ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
