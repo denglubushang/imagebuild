@@ -1,0 +1,12 @@
+# 忽略不需要的文件
+logs/
+*.log
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.git/
+.gitignore
+README.md
+docker-compose.yml
+.dockerignore

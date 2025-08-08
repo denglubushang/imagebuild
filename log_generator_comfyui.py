@@ -27,7 +27,7 @@ def setup_comfyui_logging():
     console_handler.setLevel(logging.DEBUG)
     
     # 确保logs目录存在
-    logs_dir = "/app/logs"
+    logs_dir = "/app/logs" if os.path.exists("/app") else "./logs"
     os.makedirs(logs_dir, exist_ok=True)
     
     # 创建文件处理器（带轮转）

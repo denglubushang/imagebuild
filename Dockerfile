@@ -17,5 +17,8 @@ RUN apt-get update && apt-get install -y \
 # 复制日志生成器脚本
 COPY log_generator_comfyui.py /app/
 
+# 创建日志目录
+RUN mkdir -p /app/logs
+
 # 设置容器启动命令
 CMD ["python", "log_generator_comfyui.py"]

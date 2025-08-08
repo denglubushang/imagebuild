@@ -1,4 +1,4 @@
-FROM cuda:12.2.2-devel-ubuntu22.04
+FROM pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
