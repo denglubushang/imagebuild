@@ -28,7 +28,6 @@ RUN mkdir -p /root/SwarmUI/Data
 
 COPY swarmui/swarmui.sh         /opt/supervisor/swarmui.sh
 COPY swarmui/swarmui.conf       /etc/supervisor/conf.d/swarmui.conf
-COPY swarmui/settings.json      /root/SwarmUI/Data/settings.json
 
 # 确保启动脚本有执行权限
 RUN chmod +x /opt/supervisor/swarmui.sh
