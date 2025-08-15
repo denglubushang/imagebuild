@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     pkg-config \
     cmake \
+    libsox-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -33,11 +34,17 @@ RUN git clone https://github.com/fishaudio/Bert-VITS2.git . && \
 # Install project dependencies
 RUN pip install -r requirements.txt --no-cache-dir
 
-# Install PyTorch CPU version
+# Install additional required dependencies that are not in requirements.txt
+RUN pip install soxr --no-cache-dir
+
+# Upgrade transformers to a compatible version
+RUN pip install --upgrade transformers>=4.35.0 --no-cache-dir
+
+# Install PyTorch CPU version (updated to 2.1.0)
 RUN pip install \
-    torch==2.0.1+cpu \
-    torchaudio==2.0.2+cpu \
-    torchvision==0.15.2+cpu \
+    torch==2.1.0+cpu \
+    torchaudio==2.1.0+cpu \
+    torchvision==0.16.0+cpu \
     --index-url https://download.pytorch.org/whl/cpu \
     --no-cache-dir
 
