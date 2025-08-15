@@ -47,8 +47,5 @@ RUN mkdir -p Data logs models filelists configs
 # Set permissions
 RUN chmod +x *.py
 
-# Expose port
-EXPOSE 7860
-
 # Set default command
 CMD ["python", "webui.py"]
