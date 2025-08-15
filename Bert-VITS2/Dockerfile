@@ -31,6 +31,8 @@ RUN pip install --upgrade pip
 RUN git clone https://github.com/fishaudio/Bert-VITS2.git . && \
     git checkout master
 
+WORKDIR /app/Bert-VITS2
+
 # Install project dependencies
 RUN pip install -r requirements.txt --no-cache-dir
 
