@@ -27,16 +27,18 @@ RUN apt-get update && apt-get install -y \
 # Upgrade pip
 RUN pip install --upgrade pip
 
-# Clone Bert-VITS2 project to working directory
-RUN git clone https://github.com/fishaudio/Bert-VITS2.git . && \
+# Clone Bert-VITS2 project
+RUN git clone https://github.com/fishaudio/Bert-VITS2.git && \
+    cd Bert-VITS2 && \
     git checkout master
 
+# Change working directory to Bert-VITS2
 WORKDIR /app/Bert-VITS2
 
-# Install project dependencies
+# Install project dependencies from requirements.txt
 RUN pip install -r requirements.txt --no-cache-dir
 
-# Install additional required dependencies that are not in requirements.txt
+# Install additional required dependencies
 RUN pip install soxr --no-cache-dir
 
 # Upgrade transformers to a compatible version
@@ -49,12 +51,6 @@ RUN pip install \
     torchvision==0.16.0+cpu \
     --index-url https://download.pytorch.org/whl/cpu \
     --no-cache-dir
-
-# Create necessary directories
-RUN mkdir -p Data logs models filelists configs
-
-# Set permissions
-RUN chmod +x *.py
 
 # Set default command
 CMD ["python", "webui.py"]
