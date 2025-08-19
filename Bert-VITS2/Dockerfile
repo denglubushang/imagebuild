@@ -39,8 +39,11 @@ WORKDIR /app/Bert-VITS2
 # Install project dependencies from requirements.txt
 RUN pip install -r requirements.txt --no-cache-dir
 
-# Force uninstall existing PyTorch to avoid version conflicts
-RUN pip uninstall -y torch torchaudio torchvision || true
+# Force uninstall existing PyTorch and NumPy to avoid version conflicts
+RUN pip uninstall -y torch torchaudio torchvision numpy || true
+
+# Install compatible NumPy version first (required for PyTorch 2.1.0)
+RUN pip install numpy==1.24.3 --no-cache-dir
 
 # Install PyTorch CPU version (updated to 2.1.0) - MUST be before transformers
 RUN pip install \
