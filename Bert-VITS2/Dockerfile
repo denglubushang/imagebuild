@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     cmake \
     libsox-dev \
+    libsoxr-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -38,19 +39,29 @@ WORKDIR /app/Bert-VITS2
 # Install project dependencies from requirements.txt
 RUN pip install -r requirements.txt --no-cache-dir
 
+# Force uninstall existing PyTorch to avoid version conflicts
+RUN pip uninstall -y torch torchaudio torchvision || true
+
+# Install PyTorch CPU version (updated to 2.1.0) - MUST be before transformers
+RUN pip install \
+    torch==2.1.0+cpu \
+    torchaudio==2.1.0+cpu \
+    torchvision==0.16.0+cpu \
+    --index-url https://download.pytorch.org/whl/cpu \
+    --no-cache-dir \
+    --force-reinstall
+
 # Install additional required dependencies
 RUN pip install soxr --no-cache-dir
 
 # Upgrade transformers to a compatible version
 RUN pip install --upgrade transformers>=4.35.0 --no-cache-dir
 
-# Install PyTorch CPU version (updated to 2.1.0)
-RUN pip install \
-    torch==2.1.0+cpu \
-    torchaudio==2.1.0+cpu \
-    torchvision==0.16.0+cpu \
-    --index-url https://download.pytorch.org/whl/cpu \
-    --no-cache-dir
+# Create necessary directories
+RUN mkdir -p Data logs models filelists configs
+
+# Set permissions
+RUN chmod +x *.py
 
 # Set default command
 CMD ["python", "webui.py"]
