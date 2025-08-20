@@ -2,6 +2,10 @@
 
 FROM nvidia/cuda:11.6.2-cudnn8-runtime-ubuntu20.04
 
+# Set environment variables to avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
 WORKDIR /app
 
 # Install dependencies to add PPAs
