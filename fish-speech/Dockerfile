@@ -6,9 +6,11 @@ ARG HF_ENDPOINT=https://huggingface.co
 
 WORKDIR /opt/fish-speech
 
-RUN set -ex \
-    && pip install huggingface_hub \
-    && HF_ENDPOINT=${HF_ENDPOINT} huggingface-cli download --resume-download fishaudio/${HUGGINGFACE_MODEL} --local-dir checkpoints/${HUGGINGFACE_MODEL}
+# 在stage-1中也需要安装git
+RUN apt-get update && apt-get install -y git && \
+    pip install huggingface_hub && \
+    HF_ENDPOINT=${HF_ENDPOINT} huggingface-cli download --resume-download fishaudio/${HUGGINGFACE_MODEL} --local-dir checkpoints/${HUGGINGFACE_MODEL} && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 FROM python:3.12-slim-bookworm
 ARG TARGETARCH
@@ -22,7 +24,8 @@ ARG DEPENDENCIES="  \
     portaudio19-dev \
     libportaudio2 \
     libportaudiocpp0 \
-    ffmpeg"
+    ffmpeg \
+    git"
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -43,6 +46,5 @@ RUN --mount=type=cache,target=/root/.cache,sharing=locked \
 
 COPY --from=stage-1 /opt/fish-speech/checkpoints /opt/fish-speech/checkpoints
 
-ENV GRADIO_SERVER_NAME="0.0.0.0"
 
 CMD ["./entrypoint.sh"]
