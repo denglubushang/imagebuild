@@ -2,15 +2,11 @@
 
 FROM nvidia/cuda:11.6.2-cudnn8-runtime-ubuntu20.04
 
-EXPOSE 7865
-
 WORKDIR /app
 
-COPY . .
-
-# Install dependenceis to add PPAs
+# Install dependencies to add PPAs
 RUN apt-get update && \
-    apt-get install -y -qq ffmpeg aria2 && apt clean && \
+    apt-get install -y -qq ffmpeg aria2 git && apt clean && \
     apt-get install -y software-properties-common && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -28,6 +24,10 @@ RUN apt-get update && \
 # Set Python 3.9 as the default
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
 
+# Clone the project from git
+RUN git clone https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI.git . && \
+    git checkout main
+
 RUN python3 -m pip install --upgrade pip==24.0
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
@@ -42,7 +42,5 @@ RUN aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co
 RUN aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/hubert_base.pt -d assets/hubert -o hubert_base.pt
 
 RUN aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/rmvpe.pt -d assets/rmvpe -o rmvpe.pt
-
-VOLUME [ "/app/weights", "/app/opt" ]
 
 CMD ["python3", "infer-web.py"]
