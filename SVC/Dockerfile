@@ -1,5 +1,5 @@
 # 使用CUDA 11.8 + Python 3.8作为基础镜像（支持GPU）
-FROM nvidia/cuda:11.8-devel-ubuntu20.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 # 设置工作目录
 WORKDIR /app
