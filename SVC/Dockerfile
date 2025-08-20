@@ -1,5 +1,5 @@
-# 使用CUDA 11.8 + Python 3.8作为基础镜像（支持GPU）
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+# 使用CUDA 11.8 + Ubuntu 20.04作为基础镜像（支持GPU，Python 3.8可用）
+FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
 
 # 设置工作目录
 WORKDIR /app
@@ -12,7 +12,7 @@ ENV CUDA_HOME=/usr/local/cuda
 ENV PATH=${CUDA_HOME}/bin:${PATH}
 ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 
-# 安装Python 3.8和系统依赖
+# 安装Python 3.8和系统依赖（Ubuntu 20.04支持Python 3.8）
 RUN apt-get update && apt-get install -y \
     python3.8 \
     python3.8-dev \
@@ -46,7 +46,7 @@ RUN git clone https://github.com/svc-develop-team/so-vits-svc.git /app && \
     git checkout 4.1-Stable
 
 # 复制GPU版本的requirements文件到容器中
-COPY requirements_gpu.txt /app/requirements.txt
+COPY requirements.txt /app/requirements.txt
 
 # 安装Python依赖
 RUN pip3 install --no-cache-dir -r requirements.txt
@@ -56,9 +56,6 @@ RUN wget -P pretrain/ https://huggingface.co/lj1995/VoiceConversionWebUI/resolve
 
 # 设置权限
 RUN chmod +x *.py
-
-# 暴露端口（Web UI和Flask API）
-EXPOSE 7860 6842
 
 # 复制启动脚本
 COPY run.sh /app/run.sh
