@@ -40,5 +40,7 @@ RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https:/
 
 RUN cd models/Stable-diffusion && wget --continue -O v1-5-pruned.safetensors "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned.safetensors"
 
+RUN pip3 install --no-cache-dir joblib
+
 # 设置启动命令
 CMD ["python3", "launch.py", "--listen", "--port", "7860", "--enable-insecure-extension-access"]
