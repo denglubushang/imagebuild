@@ -38,7 +38,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1 &&
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
 
 # 安装PyTorch GPU版本（CUDA 11.8兼容）
-RUN pip3 install --no-cache-dir torch==1.13.1+cu118 torchaudio==0.13.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip3 install --no-cache-dir torch==1.13.1+cu117 torchaudio==0.13.1+cu117 -f https://download.pytorch.org/whl/torch_stable.html
 
 # 从GitHub克隆项目代码
 RUN git clone https://github.com/svc-develop-team/so-vits-svc.git /app && \
