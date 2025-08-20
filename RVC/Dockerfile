@@ -10,7 +10,7 @@ WORKDIR /app
 
 # Install dependencies to add PPAs
 RUN apt-get update && \
-    apt-get install -y -qq ffmpeg aria2 git && apt clean && \
+    apt-get install -y -qq ffmpeg aria2 git wget vim net-tools iproute2 && apt clean && \
     apt-get install -y software-properties-common && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
