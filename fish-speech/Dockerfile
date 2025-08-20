@@ -3,13 +3,20 @@ ARG TARGETARCH
 
 ARG HUGGINGFACE_MODEL=fish-speech-1.5
 ARG HF_ENDPOINT=https://huggingface.co
+# 添加HF token参数
+ARG HF_TOKEN
 
 WORKDIR /opt/fish-speech
 
 # 在stage-1中也需要安装git
 RUN apt-get update && apt-get install -y git && \
     pip install huggingface_hub && \
+    # 先登录
+    huggingface-cli login --token ${HF_TOKEN} && \
+    # 下载第一个模型
     HF_ENDPOINT=${HF_ENDPOINT} huggingface-cli download --resume-download fishaudio/${HUGGINGFACE_MODEL} --local-dir checkpoints/${HUGGINGFACE_MODEL} && \
+    # 下载第二个模型
+    HF_ENDPOINT=${HF_ENDPOINT} huggingface-cli download --resume-download fishaudio/openaudio-s1-mini --local-dir checkpoints/openaudio-s1-mini && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 FROM python:3.12-slim-bookworm
