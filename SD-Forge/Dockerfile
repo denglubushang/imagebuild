@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y \
     libgomp1 \
     libgcc-s1 \
     libstdc++6 \
+    vim net-tools iproute2 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -37,5 +38,7 @@ RUN pip3 install --no-cache-dir -r requirements_versions.txt
 # 安装PyTorch (CUDA 12.1版本)
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
+RUN cd models/Stable-diffusion && wget --continue -O v1-5-pruned.safetensors "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned.safetensors"
+
 # 设置启动命令
-CMD ["python3", "webui.py", "--listen", "--port", "7860", "--enable-insecure-extension-access"]
+CMD ["python3", "launch.py", "--listen", "--port", "7860", "--enable-insecure-extension-access"]
