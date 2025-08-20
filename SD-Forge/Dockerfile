@@ -1,5 +1,5 @@
 # 使用支持CUDA的Python基础镜像
-FROM nvidia/cuda:12.1-devel-ubuntu22.04
+FROM nvidia/cuda:12.1.0-devel-ubuntu22.04
 
 # 设置环境变量
 ENV DEBIAN_FRONTEND=noninteractive
