@@ -25,7 +25,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
 
 # 升级pip
 RUN python3 -m pip install --upgrade pip setuptools wheel
-RUN pip install pip<24.1
+RUN pip install "pip<24.1"
 
 # 安装PyTorch和相关依赖（与CUDA 11.8兼容）
 RUN pip3 install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html
@@ -43,10 +43,7 @@ RUN pip3 install -r requirements.txt
 
 # 安装额外的系统级依赖
 RUN pip3 install --no-cache-dir \
-    praat-parselmouth \
-    pyworld \
-    scikit-maad \
-    local_attention \
+    praat-parselmouth pyworld scikit-maad local_attention \
     && rm -rf /root/.cache/pip
 
 # 创建必要的目录结构
