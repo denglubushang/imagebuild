@@ -39,9 +39,7 @@ RUN git clone https://github.com/svc-develop-team/so-vits-svc.git /app && \
 COPY start.sh /app/start.sh
 
 # 安装Python依赖
-RUN pip3 install -r requirements.txt
-
-RUN pip install gradio==3.50.2
+RUN pip3 install -r requirements.txt && pip install gradio==3.50.2
 
 # 安装额外的系统级依赖
 RUN pip3 install --no-cache-dir \
@@ -57,8 +55,6 @@ RUN chmod +x /app/webUI.py /app/train.py /app/inference_main.py /app/start.sh
 # 下载预训练模型（可选，ContentVec模型）
 RUN wget -O /app/pretrain/checkpoint_best_legacy_500.pt https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/hubert_base.pt
 
-# 暴露端口
-EXPOSE 7860 8001 5000
 
 # 设置默认启动命令
 CMD ["bash", "/app/start.sh", "webui"]
