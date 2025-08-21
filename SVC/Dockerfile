@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED=1
 ENV CUDA_VISIBLE_DEVICES=0
 
 # 设置工作目录
-WORKDIR /app
+WORKDIR /root
 
 # 安装系统依赖和git
 RUN apt-get update && apt-get install -y \
@@ -31,30 +31,25 @@ RUN pip install "pip<24.1"
 RUN pip3 install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html
 
 # 从GitHub克隆源代码（替换本地COPY）
-RUN git clone https://github.com/svc-develop-team/so-vits-svc.git /app && \
-    cd /app && \
-    git checkout 4.1-Stable
-
-# 复制启动脚本和健康检查脚本
-COPY start.sh /app/start.sh
+RUN git clone https://github.com/svc-develop-team/so-vits-svc.git /root/so-vits-svc
 
 # 安装Python依赖
-RUN pip3 install -r requirements.txt && pip install gradio==3.50.2
+RUN pip3 install -r /root/so-vits-svc/requirements.txt && pip install gradio==3.50.2
 
 # 安装额外的系统级依赖
 RUN pip3 install --no-cache-dir \
     praat-parselmouth pyworld scikit-maad local_attention \
     && rm -rf /root/.cache/pip
 
-# 创建必要的目录结构
-RUN mkdir -p /app/pretrain /app/logs/44k /app/dataset_raw /app/filelists /app/trained
-
-# 设置文件权限
-RUN chmod +x /app/webUI.py /app/train.py /app/inference_main.py /app/start.sh
 
 # 下载预训练模型（可选，ContentVec模型）
-RUN wget -O /app/pretrain/checkpoint_best_legacy_500.pt https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/hubert_base.pt
+RUN wget -O /root/so-vits-svc/pretrain/checkpoint_best_legacy_500.pt https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/hubert_base.pt
 
+RUN pip install jupyter && \
+    pip install nvitop && \
+    pip cache purge
+
+COPY jupyter.sh /root/jupyter.sh
 
 # 设置默认启动命令
-CMD ["bash", "/app/start.sh", "webui"]
+CMD ["bash", "/root/jupyter.sh"]
