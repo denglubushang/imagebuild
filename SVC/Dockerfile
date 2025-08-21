@@ -25,6 +25,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
 
 # 升级pip
 RUN python3 -m pip install --upgrade pip setuptools wheel
+RUN pip install pip<24.1
 
 # 安装PyTorch和相关依赖（与CUDA 11.8兼容）
 RUN pip3 install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html
@@ -52,14 +53,10 @@ RUN pip3 install --no-cache-dir \
 RUN mkdir -p /app/pretrain /app/logs/44k /app/dataset_raw /app/filelists /app/trained
 
 # 设置文件权限
-RUN chmod +x /app/webUI.py /app/train.py /app/inference_main.py /app/start.sh /app/healthcheck.sh
+RUN chmod +x /app/webUI.py /app/train.py /app/inference_main.py /app/start.sh
 
 # 下载预训练模型（可选，ContentVec模型）
 RUN wget -O /app/pretrain/checkpoint_best_legacy_500.pt https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/hubert_base.pt
-
-# 暴露端口
-EXPOSE 7860 8001 5000
-
 
 # 设置默认启动命令
 CMD ["bash", "/app/start.sh", "webui"]
