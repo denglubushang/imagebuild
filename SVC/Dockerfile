@@ -1,65 +1,65 @@
-# 使用CUDA 11.8 + Ubuntu 20.04作为基础镜像（支持GPU，Python 3.8可用）
+# So-VITS-SVC Docker镜像
+# 支持GPU加速的歌声转换系统，从GitHub直接克隆源代码
+
+# 使用NVIDIA官方PyTorch镜像作为基础
 FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
+
+# 设置环境变量
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV CUDA_VISIBLE_DEVICES=0
 
 # 设置工作目录
 WORKDIR /app
 
-# 设置环境变量
-ENV PYTHONPATH=/app
-ENV PYTHONUNBUFFERED=1
-ENV DEBIAN_FRONTEND=noninteractive
-ENV CUDA_HOME=/usr/local/cuda
-ENV PATH=${CUDA_HOME}/bin:${PATH}
-ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
-
-# 安装Python 3.8和系统依赖（Ubuntu 20.04支持Python 3.8）
+# 安装系统依赖和git
 RUN apt-get update && apt-get install -y \
-    python3.8 \
-    python3.8-dev \
-    python3.8-distutils \
-    python3-pip \
-    build-essential \
-    cmake \
-    git \
-    wget \
-    curl \
-    ffmpeg \
-    libsndfile1 \
-    libsndfile1-dev \
-    portaudio19-dev \
-    libasound2-dev \
-    libffi-dev \
-    libssl-dev \
-    pkg-config \
+    python3.9 python3.9-dev python3-pip wget curl git ffmpeg libsndfile1 \
+    libasound2-dev portaudio19-dev libportaudio2 libportaudiocpp0 pulseaudio libgl1-mesa-glx libglib2.0-0 \
+    libsm6 libxext6 libxrender-dev libgomp1 build-essential cmake pkg-config libopenblas-dev liblapack-dev gfortran \
     && rm -rf /var/lib/apt/lists/*
 
-# 设置Python 3.8为默认版本
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1 && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
+# 设置Python3.9为默认
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
 
-# 安装PyTorch GPU版本（CUDA 11.8兼容）
-RUN pip3 install --no-cache-dir torch==1.13.1+cu117 torchaudio==0.13.1+cu117 -f https://download.pytorch.org/whl/torch_stable.html
+# 升级pip
+RUN python3 -m pip install --upgrade pip setuptools wheel
 
-# 从GitHub克隆项目代码
+# 安装PyTorch和相关依赖（与CUDA 11.8兼容）
+RUN pip3 install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+
+# 从GitHub克隆源代码（替换本地COPY）
 RUN git clone https://github.com/svc-develop-team/so-vits-svc.git /app && \
     cd /app && \
     git checkout 4.1-Stable
 
-# 复制GPU版本的requirements文件到容器中
-COPY requirements.txt /app/requirements.txt
+# 复制启动脚本和健康检查脚本
+COPY start.sh /app/start.sh
 
 # 安装Python依赖
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install -r requirements.txt
 
-# 下载预训练模型（ContentVec）
-RUN wget -P pretrain/ https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/hubert_base.pt -O pretrain/checkpoint_best_legacy_500.pt
+# 安装额外的系统级依赖
+RUN pip3 install --no-cache-dir \
+    praat-parselmouth \
+    pyworld \
+    scikit-maad \
+    local_attention \
+    && rm -rf /root/.cache/pip
 
-# 设置权限
-RUN chmod +x *.py
+# 创建必要的目录结构
+RUN mkdir -p /app/pretrain /app/logs/44k /app/dataset_raw /app/filelists /app/trained
 
-# 复制启动脚本
-COPY run.sh /app/run.sh
-RUN chmod +x /app/run.sh
+# 设置文件权限
+RUN chmod +x /app/webUI.py /app/train.py /app/inference_main.py /app/start.sh /app/healthcheck.sh
 
-# 默认启动Web UI
-CMD ["/app/run.sh" "webui"]
+# 下载预训练模型（可选，ContentVec模型）
+RUN wget -O /app/pretrain/checkpoint_best_legacy_500.pt https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/hubert_base.pt
+
+# 暴露端口
+EXPOSE 7860 8001 5000
+
+
+# 设置默认启动命令
+CMD ["bash", "/app/start.sh", "webui"]

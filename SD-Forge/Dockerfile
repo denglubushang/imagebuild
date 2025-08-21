@@ -1,12 +1,12 @@
-# 使用支持CUDA的Python基础镜像
+# Use CUDA-enabled Python base image
 FROM nvidia/cuda:12.1.0-devel-ubuntu22.04
 
-# 设置环境变量
+# Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# 安装系统依赖
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     wget \
@@ -29,18 +29,18 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# 克隆项目
+# Clone the project
 RUN git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git .
 
 
 RUN pip3 install --no-cache-dir -r requirements_versions.txt
 
-# 安装PyTorch (CUDA 12.1版本)
+# Install PyTorch (CUDA 12.1 version)
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 RUN cd models/Stable-diffusion && wget --continue -O v1-5-pruned.safetensors "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned.safetensors"
 
 RUN pip3 install --no-cache-dir joblib
 
-# 设置启动命令
+# Set startup command
 CMD ["python3", "launch.py", "--listen", "--port", "7860", "--enable-insecure-extension-access"]
